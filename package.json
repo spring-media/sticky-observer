@@ -1,0 +1,36 @@
+{
+  "name": "sticky-observer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "bobaaaaa <pat.dahms@googlemail.com>",
+  "license": "MIT",
+  "scripts": {
+    "prettier": "prettier  --write 'src/**/*.{ts,tsx,js,jsx,json,scss,css}'"
+  },
+  "devDependencies": {
+    "@types/jest": "23.3.2",
+    "husky": "1.0.0-rc.14",
+    "jest": "23.6.0",
+    "prettier": "1.14.2",
+    "tslint": "5.11.0",
+    "tslint-config-prettier": "1.15.0",
+    "tslint-microsoft-contrib": "5.2.1",
+    "typescript": "3.0.3"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "tabWidth": 2,
+    "singleQuote": true
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx,js,jsx,json,scss,css}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}
