@@ -4,7 +4,7 @@
     /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */
     "target": "es5",
     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
-    "module": "commonjs",
+    "module": "ESNext",
     /* Specify library files to be included in the compilation. */
     "lib": ["es2018", "dom"],
     // "allowJs": true,                       /* Allow javascript files to be compiled. */
@@ -13,12 +13,12 @@
     /* Generates corresponding '.d.ts' file. */
     "declaration": true,
     /* Output dir for each corresponding '.d.ts' file. */
-    "declarationDir": "./build/types",
+    "declarationDir": "./dist/types",
     /* Generates corresponding '.map' file. */
     "sourceMap": true,
     // "outFile": "./",                       /* Concatenate and emit output to single file. */
     /* Redirect output structure to the directory. */
-    "outDir": "./build",
+    "outDir": "./dist",
     /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
     "rootDir": "./src",
     // "composite": true,                     /* Enable project compilation */
