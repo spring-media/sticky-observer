@@ -20,7 +20,8 @@ export const position: (element: HTMLElement) => RectPosition = (element: HTMLEl
   };
 };
 
-// In case of new lazy loaded container appears above the sticky container (like ads or breaking news)
+// Info:
+// In case of new lazy loaded container appears above the sticky container (like ads)
 // The sticky breakpoint changes dynamically.
 export const recalculateOnNormalState: (element: StickyHTMLElement) => void = (element: StickyHTMLElement): void => {
   if (element.sticky.state === StickyState.NORMAL) {

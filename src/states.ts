@@ -1,4 +1,4 @@
-import { ChangeListeners, StickyEvent, StickyHTMLElement, StickyState } from "./types";
+import { ChangeListeners, StickyEvent, StickyHTMLElement, StickyState } from './types';
 
 export function isStickyPossibleAtAll(element: StickyHTMLElement): boolean {
   return (
@@ -12,7 +12,8 @@ export function isSticky(element: StickyHTMLElement, scrollTop: number): boolean
 }
 
 export function isStickyEndOfBody(element: StickyHTMLElement, scrollTop: number): boolean {
-  const elementWithValidState: boolean = element.sticky.state === StickyState.STICKY || element.sticky.state === StickyState.STICKY_END_OF_BODY;
+  const elementWithValidState: boolean =
+    element.sticky.state === StickyState.STICKY || element.sticky.state === StickyState.STICKY_END_OF_BODY;
 
   return (
     elementWithValidState &&

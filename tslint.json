@@ -1,59 +1,60 @@
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint:recommended",
-        "tslint-config-prettier"
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended",
+    "tslint-no-unused-expression-chai",
+    "tslint-config-prettier"
+  ],
+  "rulesDirectory": "./node_modules/tslint-microsoft-contrib",
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**/*.ts"
+    ]
+  },
+  "rules": {
+    // Info:
+    // Prefixing interfaces with an `I` is annoying. Use your IDE to check types.
+    "interface-name": false,
+    "typedef": [
+      true,
+      "parameter",
+      "property-declaration",
+      "call-signature",
+      "arrow-call-signature",
+      "arrow-parameter",
+      "variable-declaration",
+      "member-variable-declaration"
     ],
-    "rulesDirectory": "./node_modules/tslint-microsoft-contrib",
-    "linterOptions": {
-        "exclude": [
-            "node_modules/**/*.ts"
-        ]
-    },
-    "rules": {
-        // Info:
-        // Prefixing interfaces with an `I` is annoying. Use your IDE to check types.
-        "interface-name": false,
-        "typedef": [
-            true,
-            "parameter",
-            "property-declaration",
-            "call-signature",
-            "arrow-call-signature",
-            "arrow-parameter",
-            "variable-declaration",
-            "member-variable-declaration"
-        ],
-        "insecure-random": true,
-        "max-func-body-length": [
-            true,
-            100,
-            {
-                "ignore-parameters-to-function-regex": "describe"
-            }
-        ],
-        "no-document-domain": true,
-        "no-document-write": true,
-        "no-for-in": true,
-        "no-function-expression": true,
-        "no-http-string": [
-            true,
-            "http://www.example.com/?.*",
-            "http://www.examples.com/?.*"
-        ],
-        "no-inner-html": true,
-        "no-typeof-undefined": true,
-        "no-unnecessary-bind": true,
-        "no-unnecessary-callback-wrapper": true,
-        "no-unnecessary-field-initialization": true,
-        "no-unnecessary-initializer": true,
-        "no-unnecessary-local-variable": true,
-        "no-unnecessary-override": true,
-        "no-unnecessary-qualifier": false,
-        "object-literal-sort-keys": false,
-        "prefer-array-literal": true,
-        "no-angle-bracket-type-assertion": true,
-        "promise-must-complete": true,
-        "use-named-parameter": true
-    }
+    "insecure-random": true,
+    "max-func-body-length": [
+      true,
+      100,
+      {
+        "ignore-parameters-to-function-regex": "describe"
+      }
+    ],
+    "no-document-domain": true,
+    "no-document-write": true,
+    "no-for-in": true,
+    "no-function-expression": true,
+    "no-http-string": [
+      true,
+      "http://www.example.com/?.*",
+      "http://www.examples.com/?.*"
+    ],
+    "no-inner-html": true,
+    "no-typeof-undefined": true,
+    "no-unnecessary-bind": true,
+    "no-unnecessary-callback-wrapper": true,
+    "no-unnecessary-field-initialization": true,
+    "no-unnecessary-initializer": true,
+    "no-unnecessary-local-variable": true,
+    "no-unnecessary-override": true,
+    "no-unnecessary-qualifier": false,
+    "object-literal-sort-keys": false,
+    "prefer-array-literal": true,
+    "no-angle-bracket-type-assertion": true,
+    "promise-must-complete": true,
+    "use-named-parameter": true
+  }
 }

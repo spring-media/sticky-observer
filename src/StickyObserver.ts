@@ -84,6 +84,7 @@ export interface Sticky {
 }
 
 export class StickyObserver implements Sticky {
+  private stickyElements!: StickyHTMLElement[];
   private active: boolean;
   private scrollTop!: number;
   private updateListener: StickyEventListener = noop;
@@ -91,35 +92,32 @@ export class StickyObserver implements Sticky {
   private resizeChangeListener: StickyEventListener = noop;
   private readonly globalEventListener: EventListener;
 
-  constructor(
-    private elements: HTMLElement[] & StickyHTMLElement[],
-    private body: HTMLElement,
-    private settings: StickySettings = {}
-  ) {
+  constructor(private elements: HTMLElement[], private body: HTMLElement, private settings: StickySettings = {}) {
     this.active = false;
-    this.updateScrollTopPosition(); // initial value
+    // Info:
+    // Initial value
+    this.updateScrollTopPosition();
     this.globalEventListener = (): void => this.updateScrollTopPosition();
   }
 
   public init(): void {
     this.addEventListeners();
-    this.elements
+    this.stickyElements = this.elements
       .map((element: HTMLElement): StickyHTMLElement => this.enhance(element))
-      .map((element: StickyHTMLElement): StickyHTMLElement => this.listen(element))
-      .forEach((element: StickyHTMLElement): void => this.update(element));
+      .map((element: StickyHTMLElement): StickyHTMLElement => this.listen(element));
   }
 
   public observe(): void {
     if (this.isNotActive()) {
       this.active = true;
-      this.elements.forEach((element: StickyHTMLElement): void => this.update(element));
+      this.stickyElements.forEach((element: StickyHTMLElement): void => this.update(element));
     }
   }
 
   public pause(): void {
     if (this.isActive()) {
       this.active = false;
-      this.elements.forEach(
+      this.stickyElements.forEach(
         (element: StickyHTMLElement): void => {
           const changeListeners: ChangeListeners = this.createChangeListeners();
           states.makeNormal(element, this.scrollTop, changeListeners);
@@ -139,7 +137,7 @@ export class StickyObserver implements Sticky {
   public destroy(): void {
     if (this.isActive()) {
       this.removeEventListeners();
-      this.elements.forEach(
+      this.stickyElements.forEach(
         (element: StickyHTMLElement): void => {
           removeResizeEvent(element);
           removeScrollEvent(element);
@@ -147,7 +145,6 @@ export class StickyObserver implements Sticky {
         }
       );
       this.active = false;
-      // emit destroy event
     }
   }
 
