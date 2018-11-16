@@ -68,9 +68,13 @@ export interface StickyElement {
 
   /**
    * a optional placeholder element to avoid content jumps when switch to position fixed.
-   * (sticky video player)
    */
   placeholder?: HTMLElement;
+
+  /**
+   * asd
+   */
+  placeholderClass?: string;
 
   /**
    * when `false` the placeholder element does not get the `nonStickyHeight`. This is useful when setting the
@@ -82,7 +86,7 @@ export interface StickyElement {
 
   /**
    * saved non-sticky height of the element.
-   * used for a placeholder element with the same height. (sticky video opener)
+   * used for a placeholder element with the same height.
    */
   nonStickyHeight: number;
 
@@ -128,25 +132,24 @@ export interface StickyElement {
 
   /**
    * fn to add the sticky [class] to the element.
+   * See: styleClass [data] attr
    */
   addStickyClass(): void;
 
   /**
-   * fn to remove the sticky [class] to the element.
+   * fn to remove the sticky [class] of the sticky element.
    */
   removeStickyClass(): void;
 
   /**
-   * fn to add the placeholder element with the same non-sticky `height`.
-   * adds a `<div/>` element to the DOM.
-   * see: `nonStickyHeight`
+   * fn to add the placeholder element `<div/>` with the same non-sticky `height` to the DOM.
+   * See: `nonStickyHeight`
    * When the sticky element has a [data-sticky-placeholder-class] attr, it adds the the class to the placeholder element.
    */
   addPlaceholder(): HTMLElement | undefined;
 
   /**
-   * fn to remove to placeholder element.
-   * will remove the `<div/>` from the DOM.
+   * fn to remove the placeholder `<div/>` element from the DOM.
    */
   removePlaceholder(): void;
 }

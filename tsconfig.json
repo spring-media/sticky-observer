@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
-    "rootDir": "./src",
+    "rootDir": "./",
     "baseUrl": "./",
     "outDir": "./dist",
     "typeRoots": ["./node_modules/@types"],
     "target": "es5",
     "module": "ESNext",
-    "moduleResolution": "node",
     "lib": ["es2018", "dom"],
     "declaration": true,
     "declarationDir": "./dist/types",
@@ -14,5 +13,6 @@
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true
-  }
+  },
+  "exclude": ["node_modules"]
 }

@@ -1,8 +1,5 @@
 // @ts-check
-// Karma configuration
-// Generated on Fri Oct 19 2018 14:24:15 GMT+0200 (Central European Summer Time)
-
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
@@ -10,8 +7,6 @@ module.exports = function(config) {
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['karma-typescript', 'mocha'],
-
-    // plugins: ['karma-coverage-istanbul-reporter'],
 
     // framework settings
     client: {
@@ -33,15 +28,21 @@ module.exports = function(config) {
       '**/*.ts': 'karma-typescript'
     },
 
+    // options for the karma-typescript plugin
+    // available: https://github.com/monounity/karma-typescript/
     karmaTypescriptConfig: {
       tsconfig: './tsconfig.json',
       compilerOptions: {
         module: 'commonjs'
       },
-      coverageReporter: {
-        instrumenterOptions: {
-          istanbul: { noCompact: true }
-        }
+      coverageOptions: {
+        threshold: {
+          global: {
+            statements: 95,
+            branches: 90,
+            functions: 100
+          }
+        },
       },
       reports: {
         html: './coverage/html',

@@ -90,7 +90,7 @@ export const addPlaceholder: (element: StickyHTMLElement) => () => HTMLElement |
   return (): HTMLElement | undefined => {
     if (element.parentElement && element.sticky.placeholder === undefined) {
       const placeholder: HTMLElement = document.createElement('div');
-      addClass(placeholder)(element.dataset.stickyPlaceholderClass);
+      addClass(placeholder)(element.sticky.placeholderClass);
       if (element.sticky.placeholderAutoHeight) {
         placeholder.style.height = `${element.sticky.nonStickyHeight}px`;
       }

@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { Sticky, StickyObserver } from './StickyObserver';
-import { StickyTestContext } from './test-helper';
+import { scrollTo, STICKY_PAGE_POSITION, StickyTestContext, triggerResizeEvent } from './test-helper';
 import { StickyHTMLElement, StickyState } from './types';
 
 // Info:
@@ -9,15 +9,23 @@ import { StickyHTMLElement, StickyState } from './types';
 const fixture: string = `
 <article id="StickyBodyContainer">
   <p>...</p>
-  <div id="StickyElement" data-sticky-offset-top="10" data-sticky-offset-bottom="20">StickyElement</div>
+  <div style="height: 200px;">small block of content</div>
+  <p>...</p>
+  <div id="StickyElement">StickyElement</div>
+  <p>...</p>
+  <div style="height: 5000px;">large block of content</div>
   <p>...</p>
 </article>
+<div>
+  <div style="height: 1000px;">some more content above the sticky body container</div>
+</div>
 `;
 
-describe('Sticky Observer: all states', (): void => {
+describe('Sticky Observer', (): void => {
   let sticky: Sticky;
   let stickyTestContext: StickyTestContext;
   let updateScrollPositionSpy: sinon.SinonSpy;
+  let windowAddEventListenerSpy: sinon.SinonSpy;
 
   beforeEach(
     (): void => {
@@ -32,7 +40,7 @@ describe('Sticky Observer: all states', (): void => {
     }
   );
 
-  describe('on instance creation', (): void => {
+  describe('on instance creation only', (): void => {
     beforeEach(
       (): void => {
         // Info: any
@@ -40,6 +48,7 @@ describe('Sticky Observer: all states', (): void => {
         // tslint:disable no-any
         updateScrollPositionSpy = sinon.spy(StickyObserver.prototype as any, 'updateScrollTopPosition');
         // tslint:enable no-any
+        windowAddEventListenerSpy = sinon.spy(window, 'addEventListener');
 
         sticky = stickyTestContext.createStickyObserver();
       }
@@ -50,14 +59,16 @@ describe('Sticky Observer: all states', (): void => {
     });
 
     it(`should set the browser scroll-Y position to start any calculation with the current scroll depth.
-            Use-Case: User refreshes the browser somewhere in the middle.`, (): void => {
+        Use-Case: User refreshes the browser somewhere in the middle.`, (): void => {
       expect(updateScrollPositionSpy.callCount).to.be.eq(1);
+    });
+
+    it(`should not add global 'scroll' and 'resize' event listener`, (): void => {
+      expect(windowAddEventListenerSpy).to.not.have.been.called;
     });
   });
 
-  describe('on init', (): void => {
-    let windowAddEventListenerSpy: sinon.SinonSpy;
-
+  describe('on init only', (): void => {
     beforeEach(
       (): void => {
         windowAddEventListenerSpy = sinon.spy(window, 'addEventListener');
@@ -82,6 +93,28 @@ describe('Sticky Observer: all states', (): void => {
 
     it('should still not active', (): void => {
       expect(sticky.isActive()).to.be.false;
+    });
+
+    it('should not trigger resize event listener', async (): Promise<void> => {
+      const resizeSpy: sinon.SinonSpy = sinon.spy();
+      sticky.onResizeChange(resizeSpy);
+
+      return triggerResizeEvent().then(
+        (): void => {
+          expect(resizeSpy).to.not.have.been.called;
+        }
+      );
+    });
+
+    it('should not trigger update event listener', async (): Promise<void> => {
+      const updateSpy: sinon.SinonSpy = sinon.spy();
+      sticky.onUpdate(updateSpy);
+
+      return scrollTo(STICKY_PAGE_POSITION).then(
+        (): void => {
+          expect(updateSpy).to.not.have.been.called;
+        }
+      );
     });
   });
 
@@ -108,6 +141,30 @@ describe('Sticky Observer: all states', (): void => {
 
       expect(element.sticky.state).to.be.eq(StickyState.NORMAL);
     });
+
+    it('should trigger resize event listener', async (): Promise<void> => {
+      const resizeSpy: sinon.SinonSpy = sinon.spy();
+      sticky.onResizeChange(resizeSpy);
+      sticky.observe();
+
+      return triggerResizeEvent().then(
+        (): void => {
+          expect(resizeSpy).to.have.been.called;
+        }
+      );
+    });
+
+    it('should trigger update event listener', async (): Promise<void> => {
+      const updateSpy: sinon.SinonSpy = sinon.spy();
+      sticky.onUpdate(updateSpy);
+      sticky.observe();
+
+      return scrollTo(STICKY_PAGE_POSITION).then(
+        (): void => {
+          expect(updateSpy).to.have.been.called;
+        }
+      );
+    });
   });
 
   describe('on pause', (): void => {
@@ -125,7 +182,7 @@ describe('Sticky Observer: all states', (): void => {
       expect(sticky.isActive()).to.be.false;
     });
 
-    it('should reset all sticky elements to `normal`', (): void => {
+    it('should reset all sticky elements to `NORMAL`', (): void => {
       const element: StickyHTMLElement = stickyTestContext.getStickyElement();
       // fake state to check the reset
       element.sticky.state = StickyState.STICKY;

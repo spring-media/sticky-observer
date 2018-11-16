@@ -20,7 +20,7 @@ const fixture: string = `
 </div>
 `;
 
-describe('Sticky Observer in sticky_end_of_body mode', (): void => {
+describe('Sticky Observer in STICKY_END_OF_BODY mode', (): void => {
   let sticky: Sticky;
   let stickyTestContext: StickyTestContext;
 
@@ -36,7 +36,7 @@ describe('Sticky Observer in sticky_end_of_body mode', (): void => {
     }
   );
 
-  describe('on start', (): void => {
+  describe('on observe', (): void => {
     beforeEach(
       (): void => {
         sticky = stickyTestContext.createStickyObserver();

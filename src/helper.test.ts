@@ -180,7 +180,7 @@ describe('placeholder: avoiding content jumps when sticky element switches from 
     });
 
     it('should add a style class when configured via [data] attr', (): void => {
-      stickyElement.dataset.stickyPlaceholderClass = 'foo-bar';
+      stickyElement.sticky.placeholderClass = 'foo-bar';
       add();
       expect(stickyElement.sticky.placeholder!.classList.contains('foo-bar')).to.be.true;
     });

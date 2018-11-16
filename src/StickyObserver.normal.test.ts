@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { Sticky } from './StickyObserver';
-import { STICKY_PAGE_POSITION, StickyTestContext } from './test-helper';
+import { STICKY_PAGE_POSITION, StickyTestContext, triggerResizeEvent } from './test-helper';
 import { StickyState } from './types';
 
 // Info:
@@ -13,7 +13,7 @@ const fixture: string = `
 </article>
 `;
 
-describe('Sticky Observer in normal mode', (): void => {
+describe('Sticky Observer in NORMAL mode', (): void => {
   let sticky: Sticky;
   let stickyTestContext: StickyTestContext;
 
@@ -29,7 +29,7 @@ describe('Sticky Observer in normal mode', (): void => {
     }
   );
 
-  describe('on start', (): void => {
+  describe('on observe', (): void => {
     beforeEach(
       (): void => {
         sticky = stickyTestContext.createStickyObserver();
@@ -79,5 +79,19 @@ describe('Sticky Observer in normal mode', (): void => {
         done();
       }, 10);
     });
+  });
+
+  describe('on resize', (): void => {
+    beforeEach(
+      (): void => {
+        sticky = stickyTestContext.createStickyObserver();
+        sticky.init();
+        sticky.observe();
+      }
+    );
+
+    // it('should do nothing', async (): Promise<void> => {
+    //   return triggerResizeEvent().then((): void => {});
+    // });
   });
 });

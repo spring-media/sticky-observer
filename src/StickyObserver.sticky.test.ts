@@ -17,7 +17,7 @@ const fixture: string = `
 </article>
 `;
 
-describe('Sticky in sticky mode', (): void => {
+describe('Sticky Observer in STICKY mode', (): void => {
   let sticky: Sticky;
   let stickyTestContext: StickyTestContext;
 
@@ -33,7 +33,7 @@ describe('Sticky in sticky mode', (): void => {
     }
   );
 
-  describe('on start', (): void => {
+  describe('on observe', (): void => {
     beforeEach(
       (): void => {
         sticky = stickyTestContext.createStickyObserver();

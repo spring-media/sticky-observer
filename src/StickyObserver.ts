@@ -172,6 +172,7 @@ export class StickyObserver implements Sticky {
       active: false,
       state: StickyState.NORMAL,
       stickyClass: toStyleClasses(element.dataset.stickyClass),
+      placeholderClass: element.dataset.stickyPlaceholderClass,
       placeholderAutoHeight: !!element.dataset.stickyPlaceholderAutoHeight || true,
       addClass: addClass(stickyElement),
       removeClass: removeClass(stickyElement),
@@ -250,13 +251,13 @@ export class StickyObserver implements Sticky {
       // This is important but raises some UI problems.
       element.sticky.removeStickyClass();
 
-      const resizeChangeEvent: StickyEvent = {
+      const resizeEvent: StickyEvent = {
         prevState: element.sticky.state,
         nextState: element.sticky.state,
         element,
         scrollTop: this.scrollTop
       };
-      this.resizeChangeListener(resizeChangeEvent);
+      this.resizeChangeListener(resizeEvent);
 
       element.sticky.rect = position(element);
       element.sticky.container.rect = position(element.sticky.container);
