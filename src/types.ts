@@ -2,24 +2,24 @@ export enum StickyState {
   /**
    * non-sticky / default state
    */
-  NORMAL = 'NORMAL',
+  NORMAL,
 
   /**
    * sticky state based on the `offsetTop` value
    */
-  STICKY = 'STICKY',
+  STICKY,
 
   /**
-   * below the sticky _body_ container is still space and the user scrolls on
+   * below the sticky container is still space and the user scrolls on
    */
-  STICKY_END_OF_BODY = 'STICKY_END_OF_BODY'
+  STICKY_END_OF_CONTAINER
 }
 
 export interface StickyEvent {
-  prevState: StickyState;
-  nextState: StickyState;
-  element: StickyHTMLElement;
-  scrollTop: number;
+  readonly prevState: StickyState;
+  readonly nextState: StickyState;
+  readonly element: StickyHTMLElement;
+  readonly scrollTop: number;
 }
 
 export interface ChangeListeners {
@@ -29,13 +29,13 @@ export interface ChangeListeners {
 }
 
 export interface Rect {
-  width: number;
-  height: number;
+  readonly width: number;
+  readonly height: number;
 }
 
 export interface RectPosition extends Rect {
-  top: number;
-  left: number;
+  readonly top: number;
+  readonly left: number;
 }
 
 export interface StickyHTMLContainer extends HTMLElement {
@@ -43,8 +43,8 @@ export interface StickyHTMLContainer extends HTMLElement {
 }
 
 export interface StickySettings {
-  offsetTop?: number;
-  offsetBottom?: number;
+  readonly offsetTop?: number;
+  readonly offsetBottom?: number;
 }
 
 export interface StickyElement {

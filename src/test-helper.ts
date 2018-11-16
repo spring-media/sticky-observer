@@ -1,6 +1,9 @@
 import { Sticky, StickyObserver } from './StickyObserver';
 import { StickyEvent, StickyHTMLElement, StickySettings } from './types';
 
+export const STICKY_CONTAINER_ID: string = 'StickyContainer';
+export const STICKY_ELEMENT_ID: string = 'StickyElement';
+
 // Info:
 // The fixtures should have a big content block with 5000px height.
 // We assume that on scroll depth 2000px the element is sticky.
@@ -8,7 +11,7 @@ export const STICKY_PAGE_POSITION: number = 2000;
 
 // Info:
 // The fixtures should have a content block with 1000px height above the sticky container.
-export const STICKY_END_OF_BODY_POSITION: number = 6000;
+export const STICKY_END_OF_CONTAINER_POSITION: number = 6000;
 
 // Info:
 // `setTimeout` is needed to trigger the event.
@@ -25,8 +28,8 @@ export class StickyTestContext {
     this.fixtureElement.innerHTML = fixture;
     window.document.body.appendChild(this.fixtureElement);
     // tslint:disable no-inner-html
-    this.stickyElement = document.getElementById('StickyElement') as HTMLElement;
-    this.stickyBodyContainer = document.getElementById('StickyBodyContainer') as HTMLElement;
+    this.stickyElement = document.getElementById(STICKY_ELEMENT_ID) as HTMLElement;
+    this.stickyBodyContainer = document.getElementById(STICKY_CONTAINER_ID) as HTMLElement;
   }
 
   public createStickyObserver(settings?: StickySettings): Sticky {

@@ -11,9 +11,9 @@ export function isSticky(element: StickyHTMLElement, scrollTop: number): boolean
   return scrollTop > element.sticky.rect.top - element.sticky.offsetTop;
 }
 
-export function isStickyEndOfBody(element: StickyHTMLElement, scrollTop: number): boolean {
+export function isStickyEndOfContainer(element: StickyHTMLElement, scrollTop: number): boolean {
   const elementWithValidState: boolean =
-    element.sticky.state === StickyState.STICKY || element.sticky.state === StickyState.STICKY_END_OF_BODY;
+    element.sticky.state === StickyState.STICKY || element.sticky.state === StickyState.STICKY_END_OF_CONTAINER;
 
   return (
     elementWithValidState &&
@@ -30,12 +30,12 @@ export function makeSticky(element: StickyHTMLElement, scrollTop: number, change
   make(StickyState.STICKY, element, scrollTop, changeListeners);
 }
 
-export function makeStickyEndOfBody(
+export function makeStickyEndOfContainer(
   element: StickyHTMLElement,
   scrollTop: number,
   changeListeners: ChangeListeners
 ): void {
-  make(StickyState.STICKY_END_OF_BODY, element, scrollTop, changeListeners);
+  make(StickyState.STICKY_END_OF_CONTAINER, element, scrollTop, changeListeners);
 }
 
 function make(

@@ -1,23 +1,29 @@
 import { expect } from 'chai';
 import { Sticky } from './StickyObserver';
-import { scrollToPosition, STICKY_PAGE_POSITION, StickyTestContext } from './test-helper';
+import {
+  scrollToPosition,
+  STICKY_CONTAINER_ID,
+  STICKY_ELEMENT_ID,
+  STICKY_PAGE_POSITION,
+  StickyTestContext
+} from './test-helper';
 import { StickyEvent, StickyHTMLElement, StickyState } from './types';
 
 // Info:
 // The sticky element should be normal on init and sticky on scroll
 const fixture: string = `
-<article id="StickyBodyContainer">
+<article id="${STICKY_CONTAINER_ID}">
   <p>...</p>
   <div style="height: 200px;">small block of content</div>
   <p>...</p>
-  <div id="StickyElement">StickyElement</div>
+  <div id="${STICKY_ELEMENT_ID}">the sticky element</div>
   <p>...</p>
   <div style="height: 5000px;">large block of content</div>
   <p>...</p>
 </article>
 `;
 
-describe('Sticky Observer in STICKY mode', (): void => {
+describe('Sticky Observer in STICKY state', (): void => {
   let sticky: Sticky;
   let stickyTestContext: StickyTestContext;
 
@@ -41,7 +47,7 @@ describe('Sticky Observer in STICKY mode', (): void => {
       }
     );
 
-    it(`should have the sticky state: normal`, (): void => {
+    it(`should have the sticky state: NORMAL`, (): void => {
       sticky.observe();
       expect(stickyTestContext.getStickyElement().sticky.state).to.be.eq(StickyState.NORMAL);
     });
@@ -56,7 +62,7 @@ describe('Sticky Observer in STICKY mode', (): void => {
       }
     );
 
-    it('should still have the sticky state: normal', (): void => {
+    it('should still have the sticky state: NORMAL', (): void => {
       sticky.pause();
 
       expect(stickyTestContext.getStickyElement().sticky.state).to.be.eq(StickyState.NORMAL);
@@ -72,7 +78,7 @@ describe('Sticky Observer in STICKY mode', (): void => {
       }
     );
 
-    it('should switch to sticky mode', (): Promise<void> => {
+    it('should switch to STICKY state', (): Promise<void> => {
       return scrollToPosition(sticky, STICKY_PAGE_POSITION).then(
         (event: StickyEvent): void => {
           expect(event.nextState).to.be.eq(StickyState.STICKY);
@@ -80,7 +86,7 @@ describe('Sticky Observer in STICKY mode', (): void => {
       );
     });
 
-    it('should switch back to normal mode', async (): Promise<void> => {
+    it('should switch back to NORMAL state', async (): Promise<void> => {
       return scrollToPosition(sticky, STICKY_PAGE_POSITION)
         .then(
           (event: StickyEvent): void => {

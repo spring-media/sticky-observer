@@ -34,7 +34,15 @@ export default [{
       resolve(),
       commonjs(),
       typescript(),
-      terser(),
+      terser({
+        ecma: 5,
+        mangle: {
+          module: true
+        },
+        compress: {
+          module: true
+        }
+      }),
       filesize()
     ]
   }

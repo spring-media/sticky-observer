@@ -1,19 +1,25 @@
 import { expect } from 'chai';
 import { Sticky } from './StickyObserver';
-import { STICKY_PAGE_POSITION, StickyTestContext, triggerResizeEvent } from './test-helper';
+import {
+  STICKY_CONTAINER_ID,
+  STICKY_ELEMENT_ID,
+  STICKY_PAGE_POSITION,
+  StickyTestContext,
+  triggerResizeEvent
+} from './test-helper';
 import { StickyState } from './types';
 
 // Info:
 // The sticky element should be always normal even on scrolling
 const fixture: string = `
-<article id="StickyBodyContainer">
+<article id="${STICKY_CONTAINER_ID}">
   <p>...</p>
-  <div id="StickyElement" data-sticky-offset-top="10" data-sticky-offset-bottom="20">StickyElement</div>
+  <div id="${STICKY_ELEMENT_ID}" data-sticky-offset-top="10" data-sticky-offset-bottom="20">the sticky element</div>
   <p>...</p>
 </article>
 `;
 
-describe('Sticky Observer in NORMAL mode', (): void => {
+describe('Sticky Observer in NORMAL state', (): void => {
   let sticky: Sticky;
   let stickyTestContext: StickyTestContext;
 
@@ -37,7 +43,7 @@ describe('Sticky Observer in NORMAL mode', (): void => {
       }
     );
 
-    it(`should have the sticky state: normal`, (): void => {
+    it(`should have the sticky state: NORMAL`, (): void => {
       sticky.observe();
       expect(stickyTestContext.getStickyElement().sticky.state).to.be.eq(StickyState.NORMAL);
     });
@@ -52,7 +58,7 @@ describe('Sticky Observer in NORMAL mode', (): void => {
       }
     );
 
-    it('should still have the sticky state: normal', (): void => {
+    it('should still have the sticky state: NORMAL', (): void => {
       sticky.pause();
 
       expect(stickyTestContext.getStickyElement().sticky.state).to.be.eq(StickyState.NORMAL);
@@ -68,10 +74,10 @@ describe('Sticky Observer in NORMAL mode', (): void => {
       }
     );
 
-    it('should not switch to sticky mode', (done: Mocha.Done): void => {
+    it('should not switch the state', (done: Mocha.Done): void => {
       // Info:
-      // No scroll event is fired on to small pages. You can test this only with more setTimeouts :(
-      // The small timeout is a good compromise.
+      // Do not use `scrollToPosition()` here. No scroll event is fired on to small pages.
+      // You can test this only with more setTimeouts :(. The small timeout is a good compromise.
       window.scrollTo(0, STICKY_PAGE_POSITION);
 
       setTimeout((): void => {
@@ -90,8 +96,12 @@ describe('Sticky Observer in NORMAL mode', (): void => {
       }
     );
 
-    // it('should do nothing', async (): Promise<void> => {
-    //   return triggerResizeEvent().then((): void => {});
-    // });
+    it('should not switch the state', async (): Promise<void> => {
+      return triggerResizeEvent().then(
+        (): void => {
+          expect(stickyTestContext.getStickyElement().sticky.state).to.be.eq(StickyState.NORMAL);
+        }
+      );
+    });
   });
 });

@@ -235,7 +235,7 @@ describe('re-calculation positions', (): void => {
     }
   );
 
-  it(`should re-calculate sticky element and sticky body container only on 'NORMAL' state.
+  it(`should re-calculate sticky element and sticky container only on 'NORMAL' state.
       This is important for async/dynamic containers (ads/3rd-party content).`, (): void => {
     // Info:
     // A better impl. would be:
@@ -253,7 +253,7 @@ describe('re-calculation positions', (): void => {
     expect(element.sticky.container.rect.width).to.not.be.null;
   });
 
-  it(`should not re-calculate on 'STICKY' mode. This is only for minimizing the overhead.`, (): void => {
+  it(`should not re-calculate on 'STICKY' state. This is only for minimizing the overhead.`, (): void => {
     element.sticky.state = StickyState.STICKY;
     recalculateOnNormalState(element);
     expect(element.sticky.rect.width).to.be.null;

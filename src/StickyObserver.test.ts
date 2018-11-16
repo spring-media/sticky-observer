@@ -1,17 +1,24 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { Sticky, StickyObserver } from './StickyObserver';
-import { scrollTo, STICKY_PAGE_POSITION, StickyTestContext, triggerResizeEvent } from './test-helper';
+import {
+  scrollTo,
+  STICKY_CONTAINER_ID,
+  STICKY_ELEMENT_ID,
+  STICKY_PAGE_POSITION,
+  StickyTestContext,
+  triggerResizeEvent
+} from './test-helper';
 import { StickyHTMLElement, StickyState } from './types';
 
 // Info:
 // The sticky element should be always normal even on scrolling
 const fixture: string = `
-<article id="StickyBodyContainer">
+<article id="${STICKY_CONTAINER_ID}">
   <p>...</p>
   <div style="height: 200px;">small block of content</div>
   <p>...</p>
-  <div id="StickyElement">StickyElement</div>
+  <div id="${STICKY_ELEMENT_ID}">the sticky element</div>
   <p>...</p>
   <div style="height: 5000px;">large block of content</div>
   <p>...</p>

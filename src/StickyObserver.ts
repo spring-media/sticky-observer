@@ -55,29 +55,24 @@ export interface Sticky {
   isActive(): boolean;
 
   /**
-   * Is sticky mode watcher _not_ active
-   */
-  isNotActive(): boolean;
-
-  /**
    * Remove all listeners (window + sticky elements)
    */
   destroy(): void;
 
   /**
-   * Callback listener for _every_ update (scroll/resize) to track css position changes. Only when sticky mode watcher is active.
+   * Callback listener for _every_ update (scroll/resize) to track css position changes. Only when sticky observer is active.
    * Only one listener is allowed.
    */
   onUpdate(listener: StickyEventListener): void;
 
   /**
-   * Callback listener for state transitions: e.g. from 'normal' to 'sticky'. Only when sticky mode watcher is active.
+   * Callback listener for state transitions: e.g. from 'NORMAL' to 'STICKY'. Only when sticky observer is active.
    * Only one listener is allowed.
    */
   onStateChange(listener: StickyEventListener): void;
 
   /**
-   * Callback listener for window resize event. Only when sticky mode watcher is active.
+   * Callback listener for window resize event. Only when sticky observer is active.
    * Only one listener is allowed.
    */
   onResizeChange(listener: StickyEventListener): void;
@@ -92,7 +87,7 @@ export class StickyObserver implements Sticky {
   private resizeChangeListener: StickyEventListener = noop;
   private readonly globalEventListener: EventListener;
 
-  constructor(private elements: HTMLElement[], private body: HTMLElement, private settings: StickySettings = {}) {
+  constructor(private elements: HTMLElement[], private container: HTMLElement, private settings: StickySettings = {}) {
     this.active = false;
     // Info:
     // Initial value
@@ -107,8 +102,10 @@ export class StickyObserver implements Sticky {
       .map((element: StickyHTMLElement): StickyHTMLElement => this.listen(element));
   }
 
+  // DX:
+  // Check if `stickyElements()` are initialized. Throw error to call `init()` first.
   public observe(): void {
-    if (this.isNotActive()) {
+    if (this.isActive() === false) {
       this.active = true;
       this.stickyElements.forEach((element: StickyHTMLElement): void => this.update(element));
     }
@@ -128,10 +125,6 @@ export class StickyObserver implements Sticky {
 
   public isActive(): boolean {
     return this.active === true;
-  }
-
-  public isNotActive(): boolean {
-    return this.active === false;
   }
 
   public destroy(): void {
@@ -168,7 +161,7 @@ export class StickyObserver implements Sticky {
       offsetBottom: this.settings.offsetBottom || toNumber(element.dataset.stickyOffsetBottom) || 0,
       nonStickyHeight: 0,
       rect: position(stickyElement),
-      container: this.body as StickyHTMLContainer,
+      container: this.container as StickyHTMLContainer,
       active: false,
       state: StickyState.NORMAL,
       stickyClass: toStyleClasses(element.dataset.stickyClass),
@@ -202,8 +195,8 @@ export class StickyObserver implements Sticky {
     if (this.isActive() && element.sticky.active === true) {
       const changeListeners: ChangeListeners = this.createChangeListeners();
 
-      if (states.isStickyEndOfBody(element, this.scrollTop)) {
-        states.makeStickyEndOfBody(element, this.scrollTop, changeListeners);
+      if (states.isStickyEndOfContainer(element, this.scrollTop)) {
+        states.makeStickyEndOfContainer(element, this.scrollTop, changeListeners);
       } else if (states.isSticky(element, this.scrollTop)) {
         states.makeSticky(element, this.scrollTop, changeListeners);
       } else {
