@@ -1,10 +1,27 @@
 {
   "name": "@welt/sticky-observer",
+  "description": "A simple and basic sticky observer (or watcher) on HTMLElement's in a given container",
   "version": "0.1.0",
   "main": "dist/sticky-observer.cjs.js",
   "module": "dist/sticky-observer.esm.js",
   "private": true,
   "author": "Patrick Dahms <pat.dahms@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spring-media/sticky-observer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/spring-media/sticky-observer/issues"
+  },
+  "homepage": "https://github.com/spring-media/sticky-observer#README",
+  "keywords": [
+    "sticky",
+    "scroll",
+    "observer",
+    "watcher",
+    "javascript",
+    "typescript"
+  ],
   "license": "MIT",
   "scripts": {
     "build": "rollup -c",
