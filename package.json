@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "main": "dist/sticky-observer.cjs.js",
   "module": "dist/sticky-observer.esm.js",
+  "types": "dist/index.d.ts",
   "author": "Patrick Dahms <pat.dahms@gmail.com>",
   "repository": {
     "type": "git",

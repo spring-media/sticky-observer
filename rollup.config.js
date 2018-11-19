@@ -9,6 +9,19 @@ import {
 } from "rollup-plugin-terser";
 import filesize from 'rollup-plugin-filesize';
 import pkg from './package.json';
+import {
+  typescript as tsc
+} from 'typescript';
+
+const defaultPlugins = [
+  resolve(),
+  commonjs(),
+  typescript({
+    typescript: tsc,
+    exclude: ['**/*.test.ts', 'src/test-helper.ts']
+  }),
+  filesize()
+];
 
 export default [{
     input: 'src/index.ts',
@@ -17,11 +30,8 @@ export default [{
       format: 'cjs'
     }],
     plugins: [
-      resolve(),
-      commonjs(),
-      typescript(),
-      uglify(),
-      filesize()
+      ...defaultPlugins,
+      uglify()
     ]
   },
   {
@@ -31,9 +41,7 @@ export default [{
       format: 'es'
     }],
     plugins: [
-      resolve(),
-      commonjs(),
-      typescript(),
+      ...defaultPlugins,
       terser({
         ecma: 5,
         mangle: {
@@ -42,8 +50,7 @@ export default [{
         compress: {
           module: true
         }
-      }),
-      filesize()
+      })
     ]
   }
 ];
