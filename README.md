@@ -1,4 +1,4 @@
-# sticky-observer
+# sticky-observer [![CircleCI](https://circleci.com/gh/spring-media/sticky-observer.svg?style=svg)](https://circleci.com/gh/spring-media/sticky-observer)
 
 A simple and basic sticky observer (or watcher) on `HTMLElement`'s in a given container. It tells you if a element is `STICKY`, `STICKY_END_OF_CONTAINER` or `NORMAL` on scrolling or resizing. All styling or positioning stuff of the actual sticky elements is **NOT** part of this library. There are some helper functions but you have the full control what happens when and how.
 
