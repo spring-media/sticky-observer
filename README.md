@@ -1,23 +1,23 @@
 # sticky-observer [![CircleCI](https://circleci.com/gh/spring-media/sticky-observer.svg?style=svg)](https://circleci.com/gh/spring-media/sticky-observer)
 
-A simple and basic sticky observer (or watcher) on `HTMLElement`'s in a given container. It tells you if a element is `STICKY`, `STICKY_END_OF_CONTAINER` or `NORMAL` on scrolling or resizing. All styling or positioning stuff of the actual sticky elements is **NOT** part of this library. There are some helper functions but you have the full control what happens when and how.
+A simple and easy to use sticky observer (or watcher) on `HTMLElement`'s in a designated container. When scrolling or resizing the window sticky-observer will tell you if an element is `STICKY`, `STICKY_END_OF_CONTAINER` or `NORMAL`. This library does **NOT** include any preconfigured styling or positioning options, what happens when and how is left up to the you to configure with the help of some included helper functions.
 
 > Bring-Your-Own-Styling (BYOS)
 
-This library is heavily inspired by [sticky-js](https://github.com/rgalus/sticky-js) with the same internal behavior and calculation but follows a different use case with BYOS.
+This library was heavily inspired by [sticky-js](https://github.com/rgalus/sticky-js), it uses the same calculations and exhibits the same internal behaviour but due to it being completely unstyled it fits a different use case, all styling is left up to the you (BYOS).
 
 ## Features
 
-- full control about styling/positioning/placeholder. NO magic BUT more work for you.
-- observing still works correctly with dynamic (out of control) appended container (ads)
-- written in TypeScript
-- no dependencies
-- tested
-- small (cjs: 6.78 KB / 1.75 KB gzip) (esm: 5.88 KB / 1.59 KB gzip)
+- Full control over styling/positioning/placeholder. NO magic BUT more work for you.
+- Observing still works correctly with dynamic (out of control) appended container (ads)
+- Written in TypeScript
+- No dependencies
+- Fully tested
+- Small (cjs: 6.78 KB / 1.75 KB gzip) (esm: 5.88 KB / 1.59 KB gzip)
 
 ## Demo
 
-This library is in production on [welt.de](https://www.welt.de) for some main features.
+This library is in production on [welt.de](https://www.welt.de) for a few main features.
 
 1. Sticky Page-Header (desktop only): [Demo](https://www.welt.de)
 2. Sticky Video-Player (desktop only): [Demo](https://www.welt.de/sport/fussball/article183952542/Nations-League-So-verhindert-die-deutsche-Nationalmannschaft-den-Abstieg.html)
@@ -72,8 +72,7 @@ stickyObserver.observe();
 new StickyObserver([stickyElement], stickyContainer, { offsetTop: 20, offsetBottom: 20 });
 ```
 
-You can configure some options of each sticky-element via HTML `[data-*]` attributes. All options are
-optional.
+Each sticky-element can be configured with a few options via HTML `[data-*]` attributes. All configuration options are optional.
 
 ```html
 <div class="container">
@@ -86,16 +85,16 @@ optional.
 
     [data-sticky-placeholder-auto-height]
     When calling `addPlaceholder()` a `<div/>` is added to the DOM with the same height of the sticky element.
-    With this option you can disable the auto height and adding a css class for example.
+    With this option you can disable the auto height and add your own css class for example.
 
     [data-sticky-offset-top]
-    The top offset take part in the 'NORMAL' to 'STICKY' calculation.
-    With the offset you have some more control about the 'sticky breakpoint'. You can 'move' it up and down.
+    The top offset takes part in the 'NORMAL' to 'STICKY' calculation.
+    With the offset you have some more control over the 'sticky breakpoint'. You can 'move' it up and down.
     The value must be a number without any units.
 
     [data-sticky-offset-bottom]
-    The bottom offset take part in the 'STICKY' to 'STICKY_END_OF_CONTAINER' calculation.
-    With the offset you have some more control about the 'sticky breakpoint'. You can 'move' it up and down.
+    The bottom offset takes part in the 'STICKY' to 'STICKY_END_OF_CONTAINER' calculation.
+    With the offset you have some more control over the 'sticky breakpoint'. You can 'move' it up and down.
     The value must be a number without any units.
   -->
   <div
@@ -123,27 +122,27 @@ optional.
 const stickyObserver = new StickyObserver([stickyElement], stickyContainer, options);
 
 // Mandatory
-// Lazy initialize function. Binds all internal listeners but did not start the observer.
+// Lazy initialize function. Binds all internal listeners but does not start the observer.
 stickyObserver.init();
 
 // Mandatory
-// Starts the observer and notifies the listeners about updates/changes/resizes.
+// Starts the observer and notifies the listeners of any updates/changes/resizes.
 stickyObserver.observe();
 
-// All global listeners are still active but did not notifies the listeners about updates/changes/resizes.
+// All global listeners are still active but does not notify the listeners of any updates/changes/resizes.
 stickyObserver.pause();
 
 // Removes all global and element listeners. Deletes the `sticky` property of each sticky element
 stickyObserver.destroy();
 
-// Register a callback function to listen on (unique) state changes only (one event per change/transition).
+// Register a callback function to listen for (unique) state changes only (one event per change/transition).
 // A basic flow is: NORMAL (start) -> STICKY -> STICKY_END_OF_CONTAINER
 stickyObserver.onStateChange(stickyEvent => {});
 
-// Register a callback function to listen on all window scroll and resize events (not throttled)
+// Register a callback function to listen for all window scroll and resize events (not throttled)
 stickyObserver.onUpdate(stickyEvent => {});
 
-// Register a callback function to listen on all window resize events only (not throttled)
+// Register a callback function to listen for all window resize events only (not throttled)
 stickyObserver.onResize(stickyEvent => {});
 
 // Is the sticky observer still active.
@@ -199,8 +198,8 @@ stickyObserver.onStateChange(stickyEvent => {
   // (number)
   const offsetBottom = sticky.offsetBottom;
 
-  // The default height of the element in a when non-sticky.
-  // This is useful for a additional placeholder somewhere.
+  // The default height of the element in a non-sticky state.
+  // This is useful for an additional placeholder somewhere.
   // (number)
   const nonStickyHeight = sticky.nonStickyHeight;
 
@@ -242,18 +241,18 @@ stickyObserver.onStateChange(stickyEvent => {
   sticky.addClass('some-special-class');
 
   // Removes the css class from the sticky element.
-  // It did not throw an error when the class is not present
+  // It does not throw an error when a class is not present
   sticky.removeClass('some-special-class');
 
-  // Adds the configured sticky class.
-  // When no sticky class is configured it does nothing.
+  // Adds a configured sticky class.
+  // When no sticky class is configured it does nothing
   sticky.addStickyClass();
 
   // Removes the configured sticky class.
-  // When no sticky class is configured it does nothing.
+  // When no sticky class is configured it does nothing
   sticky.removeStickyClass();
 
-  // Adds the configured placeholder class.
+  // Adds a configured placeholder class.
   // When no placeholder class is configured it does nothing.
   sticky.addPlaceholder();
 
@@ -265,10 +264,10 @@ stickyObserver.onStateChange(stickyEvent => {
 
 ## Browser support
 
-This library is transpiled to ES5 without any special / custom browser API. That means:
+This library is transpiled to ES5 without any special / custom browser API. This means:
+- in order for it to work on IE11 you must include the `classList` [polyfill](https://github.com/yola/classlist-polyfill)
 
-- IE11 with `classList` [polyfill](https://github.com/yola/classlist-polyfill)
-- all other major browsers
+Sticky-element works on all other major browsers.
 
 ## Build
 
