@@ -31,10 +31,7 @@ module.exports = function (config) {
     // options for the karma-typescript plugin
     // available: https://github.com/monounity/karma-typescript/
     karmaTypescriptConfig: {
-      tsconfig: './tsconfig.json',
-      compilerOptions: {
-        module: 'commonjs'
-      },
+      tsconfig: './tsconfig.test.json',
       coverageOptions: {
         threshold: {
           global: {

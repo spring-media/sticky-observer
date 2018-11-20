@@ -18,7 +18,7 @@ const defaultPlugins = [
   commonjs(),
   typescript({
     typescript: tsc,
-    exclude: ['**/*.test.ts', 'src/test-helper.ts']
+    exclude: ['**/*.test.ts', '**/test-helper.ts']
   }),
   filesize()
 ];
