@@ -1,7 +1,7 @@
 {
   "name": "@welt/sticky-observer",
   "description": "A simple and basic sticky observer (or watcher) on HTMLElement's in a given container",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "dist/sticky-observer.cjs.js",
   "module": "dist/sticky-observer.esm.js",
   "types": "dist/index.d.ts",
