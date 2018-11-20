@@ -1,5 +1,9 @@
 # sticky-observer [![CircleCI](https://circleci.com/gh/spring-media/sticky-observer.svg?style=svg)](https://circleci.com/gh/spring-media/sticky-observer)
 
+[![npm](https://img.shields.io/npm/v/@welt/sticky-observer.svg)](https://www.npmjs.com/package/@welt/sticky-observer)
+[![dep](https://david-dm.org/spring-media/sticky-observer/dev-status.svg)](https://david-dm.org/spring-media/sticky-observer?type=dev)
+[![GitHub license](https://img.shields.io/github/license/spring-media/sticky-observer.svg)](https://github.com/spring-media/sticky-observer/blob/master/LICENSE)
+
 A simple and easy to use sticky observer (or watcher) on `HTMLElement`'s in a designated container. When scrolling or resizing the window sticky-observer will tell you if an element is `STICKY`, `STICKY_END_OF_CONTAINER` or `NORMAL`. This library does **NOT** include any preconfigured styling or positioning options, what happens when and how is left up to the you to configure with the help of some included helper functions.
 
 > Bring-Your-Own-Styling (BYOS)
@@ -265,21 +269,33 @@ stickyObserver.onStateChange(stickyEvent => {
 ## Browser support
 
 This library is transpiled to ES5 without any special / custom browser API. This means:
+
 - in order for it to work on IE11 you must include the `classList` [polyfill](https://github.com/yola/classlist-polyfill)
 
 Sticky-element works on all other major browsers.
 
 ## Build
 
-```
+```bash
 yarn install
 yarn build
 ```
 
 ## Test + Coverage
 
-```
+```bash
+# You need a locally installed Chrome
 yarn test
+```
+
+## Release
+
+The npm and GitHub releases are triggered manually (via `release-it`)
+
+```bash
+# You need a valid GITHUB_TOKEN
+# See: https://github.com/webpro/release-it#github-releases
+yarn publish
 ```
 
 ## License
