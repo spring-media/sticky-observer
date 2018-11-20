@@ -1,7 +1,7 @@
 {
   "name": "@welt/sticky-observer",
   "description": "A simple and basic sticky observer (or watcher) on HTMLElement's in a given container",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "dist/sticky-observer.cjs.js",
   "module": "dist/sticky-observer.esm.js",
   "types": "dist/index.d.ts",
@@ -28,7 +28,6 @@
     "dev": "rollup -c -w",
     "lint": "tslint --project tsconfig.json",
     "test": "karma start karma.conf.js",
-    "publish": "np",
     "prettier": "prettier --write 'src/**/*.ts'"
   },
   "devDependencies": {
@@ -45,8 +44,8 @@
     "karma-typescript": "3.0.13",
     "lint-staged": "8.0.5",
     "mocha": "5.2.0",
-    "np": "3.0.4",
     "prettier": "1.15.2",
+    "release-it": "8.0.0",
     "rollup": "0.67.3",
     "rollup-plugin-commonjs": "9.2.0",
     "rollup-plugin-filesize": "5.0.1",
