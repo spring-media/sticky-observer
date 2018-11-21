@@ -1,15 +1,9 @@
 {
   "defaultSeverity": "error",
-  "extends": [
-    "tslint:recommended",
-    "tslint-no-unused-expression-chai",
-    "tslint-config-prettier"
-  ],
+  "extends": ["tslint:recommended", "tslint-no-unused-expression-chai", "tslint-config-prettier"],
   "rulesDirectory": "./node_modules/tslint-microsoft-contrib",
   "linterOptions": {
-    "exclude": [
-      "node_modules/**/*.ts"
-    ]
+    "exclude": ["node_modules/**/*.ts"]
   },
   "rules": {
     // Info:
@@ -37,11 +31,7 @@
     "no-document-write": true,
     "no-for-in": true,
     "no-function-expression": true,
-    "no-http-string": [
-      true,
-      "http://www.example.com/?.*",
-      "http://www.examples.com/?.*"
-    ],
+    "no-http-string": [true, "http://www.example.com/?.*", "http://www.examples.com/?.*"],
     "no-inner-html": true,
     "no-typeof-undefined": true,
     "no-unnecessary-bind": true,

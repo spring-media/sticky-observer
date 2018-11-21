@@ -46,3 +46,7 @@ jobs:
       - run:
           name: Build
           command: yarn build
+
+      - run:
+          name: Codecov
+          command: bash <(curl -s https://codecov.io/bash)
