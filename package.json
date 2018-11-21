@@ -29,7 +29,7 @@
     "lint": "tslint --project tsconfig.json",
     "test": "karma start karma.conf.js",
     "publish": "yarn build && release-it",
-    "prettier": "prettier --write 'src/**/*.ts'"
+    "prettier": "prettier --write 'src/**/*.{ts,js,json}'"
   },
   "devDependencies": {
     "@types/chai": "4.1.7",
@@ -62,14 +62,9 @@
     "tslint-no-unused-expression-chai": "0.1.4",
     "typescript": "3.1.6"
   },
-  "prettier": {
-    "printWidth": 120,
-    "tabWidth": 2,
-    "singleQuote": true
-  },
   "lint-staged": {
     "src/**/*.ts": [
-      "prettier --write 'src/**/*.ts'",
+      "prettier --write 'src/**/*.{ts,js,json}'",
       "git add"
     ]
   },

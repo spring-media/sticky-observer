@@ -1,6 +1,7 @@
 # sticky-observer [![CircleCI](https://circleci.com/gh/spring-media/sticky-observer.svg?style=svg)](https://circleci.com/gh/spring-media/sticky-observer)
 
 [![npm](https://img.shields.io/npm/v/@welt/sticky-observer.svg)](https://www.npmjs.com/package/@welt/sticky-observer)
+[![codecov](https://codecov.io/gh/spring-media/sticky-observer/branch/master/graph/badge.svg)](https://codecov.io/gh/spring-media/sticky-observer)
 [![dep](https://david-dm.org/spring-media/sticky-observer/dev-status.svg)](https://david-dm.org/spring-media/sticky-observer?type=dev)
 [![GitHub license](https://img.shields.io/github/license/spring-media/sticky-observer.svg)](https://github.com/spring-media/sticky-observer/blob/master/LICENSE)
 

@@ -3,10 +3,10 @@ import commonjs from 'rollup-plugin-commonjs';
 import typescript from 'rollup-plugin-typescript2';
 import {
   uglify
-} from "rollup-plugin-uglify";
+} from 'rollup-plugin-uglify';
 import {
   terser
-} from "rollup-plugin-terser";
+} from 'rollup-plugin-terser';
 import filesize from 'rollup-plugin-filesize';
 import pkg from './package.json';
 import {
@@ -29,10 +29,7 @@ export default [{
       file: pkg.main,
       format: 'cjs'
     }],
-    plugins: [
-      ...defaultPlugins,
-      uglify()
-    ]
+    plugins: [...defaultPlugins, uglify()]
   },
   {
     input: 'src/index.ts',

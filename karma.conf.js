@@ -1,5 +1,5 @@
 // @ts-check
-module.exports = function (config) {
+module.exports = function(config) {
   config.set({
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
@@ -39,11 +39,16 @@ module.exports = function (config) {
             branches: 90,
             functions: 100
           }
-        },
+        }
       },
       reports: {
-        html: './coverage/html',
-        json: './coverage',
+        html: {
+          subdirectory: 'html'
+        },
+        lcovonly: {
+          subdirectory: 'lcov',
+          filename: 'lcov.info'
+        },
         'text-summary': ''
       }
     },
