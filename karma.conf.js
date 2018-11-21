@@ -32,15 +32,6 @@ module.exports = function(config) {
     // available: https://github.com/monounity/karma-typescript/
     karmaTypescriptConfig: {
       tsconfig: './tsconfig.test.json',
-      coverageOptions: {
-        threshold: {
-          global: {
-            statements: 95,
-            branches: 90,
-            functions: 100
-          }
-        }
-      },
       reports: {
         html: {
           subdirectory: 'html'
