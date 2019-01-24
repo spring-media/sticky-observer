@@ -4990,10 +4990,10 @@ registry-url@^3.0.3:
   dependencies:
     rc "^1.0.1"
 
-release-it@10.0.0:
-  version "10.0.0"
-  resolved "https://registry.npmjs.org/release-it/-/release-it-10.0.0.tgz#7c92608ae94c4e32df96af9f0c9bb53f35ed2be9"
-  integrity sha512-mafog8vgXiwzmI2OvDfmXaHOe1fMFkkfMsSOI/o0fsZms8fN1IJtHxxY6sbEn8EXaQW05I6UYeHAsB7DmgRarA==
+release-it@10.0.3:
+  version "10.0.3"
+  resolved "https://registry.npmjs.org/release-it/-/release-it-10.0.3.tgz#087c79edee10062625ff5f6a2fa24a931a0650d8"
+  integrity sha512-V9RMd8PnMvhYD4rrmdi5nEhm3jYgOnb2/zPz8X18A9VqeKRTSUveqliiqpzuN7HYTLYWh05oj5HzmTVqMJFP2g==
   dependencies:
     "@octokit/rest" "16.8.1"
     async-retry "1.2.3"
@@ -5143,10 +5143,10 @@ rollup-plugin-commonjs@9.2.0:
     resolve "^1.8.1"
     rollup-pluginutils "^2.3.3"
 
-rollup-plugin-filesize@6.0.0:
-  version "6.0.0"
-  resolved "https://registry.npmjs.org/rollup-plugin-filesize/-/rollup-plugin-filesize-6.0.0.tgz#6188769eff2ee6f4508e0f6de5cf64409e2a269d"
-  integrity sha512-yU1nNkB2RP1PwLpBFIzH9oIwLL+Si6AEuy0/hAhFW+68hy6x/W/MxhhsUe7bDhG7Gnei7FOGC4Ag4W9+CninMQ==
+rollup-plugin-filesize@6.0.1:
+  version "6.0.1"
+  resolved "https://registry.npmjs.org/rollup-plugin-filesize/-/rollup-plugin-filesize-6.0.1.tgz#71937b48a411374c76c4a7e6bbdb087780d8bd64"
+  integrity sha512-wtxHShJofSxJRuYGGxgwIJyxxW+Mgu/vGGcsOUJVN+US6jE+gQYphSS3H2PS2HCVfxDtERtL0gjptk1gYru9rA==
   dependencies:
     boxen "^2.0.0"
     brotli-size "0.0.3"
@@ -5204,10 +5204,10 @@ rollup-pluginutils@2.3.3, rollup-pluginutils@^2.3.3:
     estree-walker "^0.5.2"
     micromatch "^2.3.11"
 
-rollup@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/rollup/-/rollup-1.1.0.tgz#461a7534b55be48aa4a6e6810a1543a5769e75d1"
-  integrity sha512-NK03gkkOz0CchHBMGomcNqa6U3jLNzHuWK9SI0+1FV475JA6cQxVtjlDcQoKKDNIQ3IwYumIlgoKYDEWUyFBwQ==
+rollup@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.npmjs.org/rollup/-/rollup-1.1.2.tgz#8d094b85683b810d0c05a16bd7618cf70d48eba7"
+  integrity sha512-OkdMxqMl8pWoQc5D8y1cIinYQPPLV8ZkfLgCzL6SytXeNA2P7UHynEQXI9tYxuAjAMsSyvRaWnyJDLHMxq0XAg==
   dependencies:
     "@types/estree" "0.0.39"
     "@types/node" "*"

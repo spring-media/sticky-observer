@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../dist/sticky-observer.js"></script>
+
+  <style>
+    .sticky-element {
+      color: red;
+    }
+
+    .sticky-element--is-sticky {
+      position: fixed;
+      color: green;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container" style="height: 5000px;">
+    <div class="sticky-element" data-sticky-class="sticky-element--is-sticky">example</div>
+  </div>
+
+
+  <script>
+    var stickyContainer = document.querySelector('.container');
+    var stickyElement = document.querySelector('.sticky-element');
+    var stickyObserver = new sticky.StickyObserver([stickyElement], stickyContainer);
+
+    stickyObserver.init();
+
+    stickyObserver.onStateChange(function (event) {
+      switch (event.nextState) {
+        case sticky.StickyState.STICKY:
+          console.log('STICKY');
+          event.element.sticky.addStickyClass();
+          break;
+        case sticky.StickyState.NORMAL:
+          console.log('NORMAL');
+          event.element.sticky.removeStickyClass();
+          break;
+        default:
+          // ignore
+          break;
+      }
+    });
+
+    stickyObserver.observe();
+
+  </script>
+
+</body>
+
+</html>
