@@ -29,7 +29,8 @@
     "dev": "rollup -c -w",
     "lint": "tslint --project tsconfig.json",
     "test": "karma start karma.conf.js",
-    "publish": "yarn build && release-it",
+    "beforestart": "yarn lint && yarn test && yarn build",
+    "release": "release-it",
     "prettier": "prettier --write 'src/**/*.{ts,js,json}'"
   },
   "devDependencies": {
