@@ -1,6 +1,8 @@
 {
   "pkgFiles": ["package.json"],
-  "requireUpstream": false,
+  "git": {
+    "requireUpstream": false
+  },
   "github": {
     "release": true
   },
