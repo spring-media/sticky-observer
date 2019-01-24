@@ -267,6 +267,10 @@ stickyObserver.onStateChange(stickyEvent => {
 });
 ```
 
+## Usage standalone Browser version
+
+See [Demo](demo/index.html)
+
 ## Browser support
 
 This library is transpiled to ES5 without any special / custom browser API. This means:

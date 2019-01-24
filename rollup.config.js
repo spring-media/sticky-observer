@@ -34,6 +34,15 @@ export default [{
   {
     input: 'src/index.ts',
     output: [{
+      file: pkg.browser,
+      name: 'sticky',
+      format: 'iife'
+    }],
+    plugins: [...defaultPlugins, uglify()]
+  },
+  {
+    input: 'src/index.ts',
+    output: [{
       file: pkg.module,
       format: 'es'
     }],
