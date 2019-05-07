@@ -34,7 +34,6 @@
     "no-http-string": [true, "http://www.example.com/?.*", "http://www.examples.com/?.*"],
     "no-inner-html": true,
     "no-typeof-undefined": true,
-    "no-unnecessary-bind": true,
     "no-unnecessary-callback-wrapper": true,
     "no-unnecessary-field-initialization": true,
     "no-unnecessary-initializer": true,
