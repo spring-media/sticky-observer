@@ -34,32 +34,26 @@ describe('Sticky Observer', (): void => {
   let updateScrollPositionSpy: sinon.SinonSpy;
   let windowAddEventListenerSpy: sinon.SinonSpy;
 
-  beforeEach(
-    (): void => {
-      stickyTestContext = new StickyTestContext(fixture);
-    }
-  );
+  beforeEach((): void => {
+    stickyTestContext = new StickyTestContext(fixture);
+  });
 
-  afterEach(
-    (): void => {
-      stickyTestContext.cleanUp(sticky);
-      sinon.restore();
-    }
-  );
+  afterEach((): void => {
+    stickyTestContext.cleanUp(sticky);
+    sinon.restore();
+  });
 
   describe('on instance creation only', (): void => {
-    beforeEach(
-      (): void => {
-        // Info: any
-        // Testing internal (private) functions
-        // tslint:disable no-any
-        updateScrollPositionSpy = sinon.spy(StickyObserver.prototype as any, 'updateScrollTopPosition');
-        // tslint:enable no-any
-        windowAddEventListenerSpy = sinon.spy(window, 'addEventListener');
+    beforeEach((): void => {
+      // Info: any
+      // Testing internal (private) functions
+      // tslint:disable no-any
+      updateScrollPositionSpy = sinon.spy(StickyObserver.prototype as any, 'updateScrollTopPosition');
+      // tslint:enable no-any
+      windowAddEventListenerSpy = sinon.spy(window, 'addEventListener');
 
-        sticky = stickyTestContext.createStickyObserver();
-      }
-    );
+      sticky = stickyTestContext.createStickyObserver();
+    });
 
     it('should be not active by default', (): void => {
       expect(sticky.isActive()).to.be.false;
@@ -76,14 +70,12 @@ describe('Sticky Observer', (): void => {
   });
 
   describe('on init only', (): void => {
-    beforeEach(
-      (): void => {
-        windowAddEventListenerSpy = sinon.spy(window, 'addEventListener');
+    beforeEach((): void => {
+      windowAddEventListenerSpy = sinon.spy(window, 'addEventListener');
 
-        sticky = stickyTestContext.createStickyObserver();
-        sticky.init();
-      }
-    );
+      sticky = stickyTestContext.createStickyObserver();
+      sticky.init();
+    });
 
     it(`should add a global listener for 'scroll' and 'resize' to update the scroll-Y position`, (): void => {
       // Info:
@@ -106,32 +98,26 @@ describe('Sticky Observer', (): void => {
       const resizeSpy: sinon.SinonSpy = sinon.spy();
       sticky.onResizeChange(resizeSpy);
 
-      return triggerResizeEvent().then(
-        (): void => {
-          expect(resizeSpy).to.not.have.been.called;
-        }
-      );
+      return triggerResizeEvent().then((): void => {
+        expect(resizeSpy).to.not.have.been.called;
+      });
     });
 
     it('should not trigger update event listener', async (): Promise<void> => {
       const updateSpy: sinon.SinonSpy = sinon.spy();
       sticky.onUpdate(updateSpy);
 
-      return scrollTo(STICKY_PAGE_POSITION).then(
-        (): void => {
-          expect(updateSpy).to.not.have.been.called;
-        }
-      );
+      return scrollTo(STICKY_PAGE_POSITION).then((): void => {
+        expect(updateSpy).to.not.have.been.called;
+      });
     });
   });
 
   describe('on starting to observe', (): void => {
-    beforeEach(
-      (): void => {
-        sticky = stickyTestContext.createStickyObserver();
-        sticky.init();
-      }
-    );
+    beforeEach((): void => {
+      sticky = stickyTestContext.createStickyObserver();
+      sticky.init();
+    });
 
     it('should be active now', (): void => {
       sticky.observe();
@@ -154,11 +140,9 @@ describe('Sticky Observer', (): void => {
       sticky.onResizeChange(resizeSpy);
       sticky.observe();
 
-      return triggerResizeEvent().then(
-        (): void => {
-          expect(resizeSpy).to.have.been.called;
-        }
-      );
+      return triggerResizeEvent().then((): void => {
+        expect(resizeSpy).to.have.been.called;
+      });
     });
 
     it('should trigger update event listener', async (): Promise<void> => {
@@ -166,22 +150,18 @@ describe('Sticky Observer', (): void => {
       sticky.onUpdate(updateSpy);
       sticky.observe();
 
-      return scrollTo(STICKY_PAGE_POSITION).then(
-        (): void => {
-          expect(updateSpy).to.have.been.called;
-        }
-      );
+      return scrollTo(STICKY_PAGE_POSITION).then((): void => {
+        expect(updateSpy).to.have.been.called;
+      });
     });
   });
 
   describe('on pause', (): void => {
-    beforeEach(
-      (): void => {
-        sticky = stickyTestContext.createStickyObserver();
-        sticky.init();
-        sticky.observe();
-      }
-    );
+    beforeEach((): void => {
+      sticky = stickyTestContext.createStickyObserver();
+      sticky.init();
+      sticky.observe();
+    });
 
     it('should not be active anymore', (): void => {
       sticky.pause();
@@ -201,16 +181,14 @@ describe('Sticky Observer', (): void => {
   });
 
   describe('with setting overrides', (): void => {
-    beforeEach(
-      (): void => {
-        sticky = stickyTestContext.createStickyObserver({
-          offsetTop: 1337,
-          offsetBottom: 31337
-        });
-        sticky.init();
-        sticky.observe();
-      }
-    );
+    beforeEach((): void => {
+      sticky = stickyTestContext.createStickyObserver({
+        offsetTop: 1337,
+        offsetBottom: 31337
+      });
+      sticky.init();
+      sticky.observe();
+    });
 
     it('should override offsetTop. Used for dynamic override based on device.', (): void => {
       const element: StickyHTMLElement = stickyTestContext.getStickyElement();

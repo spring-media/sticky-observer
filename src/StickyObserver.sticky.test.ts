@@ -27,25 +27,19 @@ describe('Sticky Observer in STICKY state', (): void => {
   let sticky: Sticky;
   let stickyTestContext: StickyTestContext;
 
-  beforeEach(
-    (): void => {
-      stickyTestContext = new StickyTestContext(fixture);
-    }
-  );
+  beforeEach((): void => {
+    stickyTestContext = new StickyTestContext(fixture);
+  });
 
-  afterEach(
-    (): void => {
-      stickyTestContext.cleanUp(sticky);
-    }
-  );
+  afterEach((): void => {
+    stickyTestContext.cleanUp(sticky);
+  });
 
   describe('on observe', (): void => {
-    beforeEach(
-      (): void => {
-        sticky = stickyTestContext.createStickyObserver();
-        sticky.init();
-      }
-    );
+    beforeEach((): void => {
+      sticky = stickyTestContext.createStickyObserver();
+      sticky.init();
+    });
 
     it(`should have the sticky state: NORMAL`, (): void => {
       sticky.observe();
@@ -54,13 +48,11 @@ describe('Sticky Observer in STICKY state', (): void => {
   });
 
   describe('on pause', (): void => {
-    beforeEach(
-      (): void => {
-        sticky = stickyTestContext.createStickyObserver();
-        sticky.init();
-        sticky.observe();
-      }
-    );
+    beforeEach((): void => {
+      sticky = stickyTestContext.createStickyObserver();
+      sticky.init();
+      sticky.observe();
+    });
 
     it('should still have the sticky state: NORMAL', (): void => {
       sticky.pause();
@@ -70,50 +62,40 @@ describe('Sticky Observer in STICKY state', (): void => {
   });
 
   describe('on scroll', (): void => {
-    beforeEach(
-      (): void => {
-        sticky = stickyTestContext.createStickyObserver();
-        sticky.init();
-        sticky.observe();
-      }
-    );
+    beforeEach((): void => {
+      sticky = stickyTestContext.createStickyObserver();
+      sticky.init();
+      sticky.observe();
+    });
 
     it('should switch to STICKY state', (): Promise<void> => {
-      return scrollToPosition(sticky, STICKY_PAGE_POSITION).then(
-        (event: StickyEvent): void => {
-          expect(event.nextState).to.be.eq(StickyState.STICKY);
-        }
-      );
+      return scrollToPosition(sticky, STICKY_PAGE_POSITION).then((event: StickyEvent): void => {
+        expect(event.nextState).to.be.eq(StickyState.STICKY);
+      });
     });
 
     it('should switch back to NORMAL state', async (): Promise<void> => {
       return scrollToPosition(sticky, STICKY_PAGE_POSITION)
-        .then(
-          (event: StickyEvent): void => {
-            expect(event.nextState).to.be.eq(StickyState.STICKY);
-          }
-        )
+        .then((event: StickyEvent): void => {
+          expect(event.nextState).to.be.eq(StickyState.STICKY);
+        })
         .then(
           async (): Promise<StickyEvent> => {
             return scrollToPosition(sticky, 0);
           }
         )
-        .then(
-          (event: StickyEvent): void => {
-            expect(event.nextState).to.be.eq(StickyState.NORMAL);
-          }
-        );
+        .then((event: StickyEvent): void => {
+          expect(event.nextState).to.be.eq(StickyState.NORMAL);
+        });
     });
   });
 
   describe('with placeholder', (): void => {
-    beforeEach(
-      (): void => {
-        sticky = stickyTestContext.createStickyObserver();
-        sticky.init();
-        sticky.observe();
-      }
-    );
+    beforeEach((): void => {
+      sticky = stickyTestContext.createStickyObserver();
+      sticky.init();
+      sticky.observe();
+    });
 
     it('should be added to body container', (): void => {
       const stickyElement: StickyHTMLElement = stickyTestContext.getStickyElement();

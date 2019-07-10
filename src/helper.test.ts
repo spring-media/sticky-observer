@@ -19,12 +19,10 @@ describe('addClass(): adding classes to an element', (): void => {
   let element: HTMLElement;
   let add: (value: string) => void;
 
-  beforeEach(
-    (): void => {
-      element = document.createElement('div');
-      add = addClass(element);
-    }
-  );
+  beforeEach((): void => {
+    element = document.createElement('div');
+    add = addClass(element);
+  });
 
   it('should add a single class', (): void => {
     add('foo');
@@ -47,12 +45,10 @@ describe('removeClass(): remove classes from an element', (): void => {
   let element: HTMLElement;
   let remove: (value: string) => void;
 
-  beforeEach(
-    (): void => {
-      element = document.createElement('div');
-      remove = removeClass(element);
-    }
-  );
+  beforeEach((): void => {
+    element = document.createElement('div');
+    remove = removeClass(element);
+  });
 
   it('should remove a single class', (): void => {
     element.classList.add('foo');
@@ -82,15 +78,13 @@ describe('addStickyClass(): maybe adding the configured sticky class', (): void 
   let element: StickyHTMLElement;
   let add: () => void;
 
-  beforeEach(
-    (): void => {
-      const div: HTMLElement = document.createElement('div');
-      element = div as StickyHTMLElement;
-      element.sticky = {} as any;
+  beforeEach((): void => {
+    const div: HTMLElement = document.createElement('div');
+    element = div as StickyHTMLElement;
+    element.sticky = {} as any;
 
-      add = addStickyClass(element);
-    }
-  );
+    add = addStickyClass(element);
+  });
 
   it('should add all elements of `stickyClass` to the [class] attr', (): void => {
     element.sticky.stickyClass = ['foo', 'bar'];
@@ -110,15 +104,13 @@ describe('removeStickyClass(): maybe removing the configured sticky class', (): 
   let element: StickyHTMLElement;
   let remove: () => void;
 
-  beforeEach(
-    (): void => {
-      const div: HTMLElement = document.createElement('div');
-      element = div as StickyHTMLElement;
-      element.sticky = {} as any;
+  beforeEach((): void => {
+    const div: HTMLElement = document.createElement('div');
+    element = div as StickyHTMLElement;
+    element.sticky = {} as any;
 
-      remove = removeStickyClass(element);
-    }
-  );
+    remove = removeStickyClass(element);
+  });
 
   it('should remove all elements of `stickyClass` to the [class] attr', (): void => {
     element.sticky.stickyClass = ['foo', 'bar'];
@@ -141,26 +133,22 @@ describe('placeholder: avoiding content jumps when sticky element switches from 
   let add: () => HTMLElement | undefined;
   let remove: () => void;
 
-  beforeEach(
-    (): void => {
-      const div: HTMLElement = document.createElement('div');
-      parent = document.createElement('div');
-      stickyElement = div as StickyHTMLElement;
-      stickyElement.sticky = {} as any;
-      parent.appendChild(stickyElement);
-      document.body.appendChild(parent);
-      stickyElement.sticky.nonStickyHeight = 100;
+  beforeEach((): void => {
+    const div: HTMLElement = document.createElement('div');
+    parent = document.createElement('div');
+    stickyElement = div as StickyHTMLElement;
+    stickyElement.sticky = {} as any;
+    parent.appendChild(stickyElement);
+    document.body.appendChild(parent);
+    stickyElement.sticky.nonStickyHeight = 100;
 
-      add = addPlaceholder(stickyElement);
-      remove = removePlaceholder(stickyElement);
-    }
-  );
+    add = addPlaceholder(stickyElement);
+    remove = removePlaceholder(stickyElement);
+  });
 
-  afterEach(
-    (): void => {
-      document.body.removeChild(parent);
-    }
-  );
+  afterEach((): void => {
+    document.body.removeChild(parent);
+  });
 
   describe('adding', (): void => {
     it('should add placeholder `<div/>` element', (): void => {
@@ -218,22 +206,20 @@ describe('placeholder: avoiding content jumps when sticky element switches from 
 describe('re-calculation positions', (): void => {
   let element: StickyHTMLElement;
 
-  beforeEach(
-    (): void => {
-      const div: HTMLElement = document.createElement('div');
-      const fakeRect: any = {
-        width: null,
-        height: null,
-        left: null,
-        top: null
-      };
-      element = div as StickyHTMLElement;
-      element.sticky = {} as any;
-      element.sticky.rect = fakeRect;
-      (element.sticky.container as any) = {} as any;
-      element.sticky.container.rect = fakeRect;
-    }
-  );
+  beforeEach((): void => {
+    const div: HTMLElement = document.createElement('div');
+    const fakeRect: any = {
+      width: null,
+      height: null,
+      left: null,
+      top: null
+    };
+    element = div as StickyHTMLElement;
+    element.sticky = {} as any;
+    element.sticky.rect = fakeRect;
+    (element.sticky.container as any) = {} as any;
+    element.sticky.container.rect = fakeRect;
+  });
 
   it(`should re-calculate sticky element and sticky container only on 'NORMAL' state.
       This is important for async/dynamic containers (ads/3rd-party content).`, (): void => {
@@ -296,19 +282,15 @@ describe('toStyleClasses(): from string to string[]', (): void => {
 describe('removeResizeEvent(): removing the global resize event for the sticky element', (): void => {
   let stickyElement: StickyHTMLElement;
 
-  beforeEach(
-    (): void => {
-      const div: HTMLElement = document.createElement('div');
-      stickyElement = div as StickyHTMLElement;
-      stickyElement.sticky = {} as any;
-    }
-  );
+  beforeEach((): void => {
+    const div: HTMLElement = document.createElement('div');
+    stickyElement = div as StickyHTMLElement;
+    stickyElement.sticky = {} as any;
+  });
 
-  afterEach(
-    (): void => {
-      sinon.restore();
-    }
-  );
+  afterEach((): void => {
+    sinon.restore();
+  });
 
   it('should remove global sticky element resize event', (): void => {
     const removeSpy: sinon.SinonSpy = sinon.spy();
@@ -332,19 +314,15 @@ describe('removeResizeEvent(): removing the global resize event for the sticky e
 describe('removeScrollEvent(): removing the global scroll event for the sticky element', (): void => {
   let stickyElement: StickyHTMLElement;
 
-  beforeEach(
-    (): void => {
-      const div: HTMLElement = document.createElement('div');
-      stickyElement = div as StickyHTMLElement;
-      stickyElement.sticky = {} as any;
-    }
-  );
+  beforeEach((): void => {
+    const div: HTMLElement = document.createElement('div');
+    stickyElement = div as StickyHTMLElement;
+    stickyElement.sticky = {} as any;
+  });
 
-  afterEach(
-    (): void => {
-      sinon.restore();
-    }
-  );
+  afterEach((): void => {
+    sinon.restore();
+  });
 
   it('should remove global sticky element resize event', (): void => {
     const removeSpy: sinon.SinonSpy = sinon.spy();
