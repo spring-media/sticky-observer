@@ -23,25 +23,19 @@ describe('Sticky Observer in NORMAL state', (): void => {
   let sticky: Sticky;
   let stickyTestContext: StickyTestContext;
 
-  beforeEach(
-    (): void => {
-      stickyTestContext = new StickyTestContext(fixture);
-    }
-  );
+  beforeEach((): void => {
+    stickyTestContext = new StickyTestContext(fixture);
+  });
 
-  afterEach(
-    (): void => {
-      stickyTestContext.cleanUp(sticky);
-    }
-  );
+  afterEach((): void => {
+    stickyTestContext.cleanUp(sticky);
+  });
 
   describe('on observe', (): void => {
-    beforeEach(
-      (): void => {
-        sticky = stickyTestContext.createStickyObserver();
-        sticky.init();
-      }
-    );
+    beforeEach((): void => {
+      sticky = stickyTestContext.createStickyObserver();
+      sticky.init();
+    });
 
     it(`should have the sticky state: NORMAL`, (): void => {
       sticky.observe();
@@ -50,13 +44,11 @@ describe('Sticky Observer in NORMAL state', (): void => {
   });
 
   describe('on pause', (): void => {
-    beforeEach(
-      (): void => {
-        sticky = stickyTestContext.createStickyObserver();
-        sticky.init();
-        sticky.observe();
-      }
-    );
+    beforeEach((): void => {
+      sticky = stickyTestContext.createStickyObserver();
+      sticky.init();
+      sticky.observe();
+    });
 
     it('should still have the sticky state: NORMAL', (): void => {
       sticky.pause();
@@ -66,13 +58,11 @@ describe('Sticky Observer in NORMAL state', (): void => {
   });
 
   describe('on scroll', (): void => {
-    beforeEach(
-      (): void => {
-        sticky = stickyTestContext.createStickyObserver();
-        sticky.init();
-        sticky.observe();
-      }
-    );
+    beforeEach((): void => {
+      sticky = stickyTestContext.createStickyObserver();
+      sticky.init();
+      sticky.observe();
+    });
 
     it('should not switch the state', (done: Mocha.Done): void => {
       // Info:
@@ -88,20 +78,16 @@ describe('Sticky Observer in NORMAL state', (): void => {
   });
 
   describe('on resize', (): void => {
-    beforeEach(
-      (): void => {
-        sticky = stickyTestContext.createStickyObserver();
-        sticky.init();
-        sticky.observe();
-      }
-    );
+    beforeEach((): void => {
+      sticky = stickyTestContext.createStickyObserver();
+      sticky.init();
+      sticky.observe();
+    });
 
     it('should not switch the state', async (): Promise<void> => {
-      return triggerResizeEvent().then(
-        (): void => {
-          expect(stickyTestContext.getStickyElement().sticky.state).to.be.eq(StickyState.NORMAL);
-        }
-      );
+      return triggerResizeEvent().then((): void => {
+        expect(stickyTestContext.getStickyElement().sticky.state).to.be.eq(StickyState.NORMAL);
+      });
     });
   });
 });

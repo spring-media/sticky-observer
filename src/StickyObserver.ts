@@ -114,12 +114,10 @@ export class StickyObserver implements Sticky {
   public pause(): void {
     if (this.isActive()) {
       this.active = false;
-      this.stickyElements.forEach(
-        (element: StickyHTMLElement): void => {
-          const changeListeners: ChangeListeners = this.createChangeListeners();
-          states.makeNormal(element, this.scrollTop, changeListeners);
-        }
-      );
+      this.stickyElements.forEach((element: StickyHTMLElement): void => {
+        const changeListeners: ChangeListeners = this.createChangeListeners();
+        states.makeNormal(element, this.scrollTop, changeListeners);
+      });
     }
   }
 
@@ -130,13 +128,11 @@ export class StickyObserver implements Sticky {
   public destroy(): void {
     if (this.isActive()) {
       this.removeEventListeners();
-      this.stickyElements.forEach(
-        (element: StickyHTMLElement): void => {
-          removeResizeEvent(element);
-          removeScrollEvent(element);
-          delete element.sticky;
-        }
-      );
+      this.stickyElements.forEach((element: StickyHTMLElement): void => {
+        removeResizeEvent(element);
+        removeScrollEvent(element);
+        delete element.sticky;
+      });
       this.active = false;
     }
   }
@@ -217,19 +213,15 @@ export class StickyObserver implements Sticky {
   }
 
   private addEventListeners(): void {
-    ['scroll', 'resize'].forEach(
-      (eventName: string): void => {
-        window.addEventListener(eventName, this.globalEventListener);
-      }
-    );
+    ['scroll', 'resize'].forEach((eventName: string): void => {
+      window.addEventListener(eventName, this.globalEventListener);
+    });
   }
 
   private removeEventListeners(): void {
-    ['scroll', 'resize'].forEach(
-      (eventName: string): void => {
-        window.removeEventListener(eventName, this.globalEventListener);
-      }
-    );
+    ['scroll', 'resize'].forEach((eventName: string): void => {
+      window.removeEventListener(eventName, this.globalEventListener);
+    });
   }
 
   private addResizeListener(element: StickyHTMLElement): void {

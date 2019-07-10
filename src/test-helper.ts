@@ -48,44 +48,36 @@ export class StickyTestContext {
 }
 
 export async function scrollTo(position: number): Promise<void> {
-  return new Promise<void>(
-    (resolve: () => void): void => {
-      setTimeout(
-        (): void => {
-          // Info:
-          // `scrollTo` will emit native browser scroll event
-          window.scrollTo(0, position);
-          setTimeout(resolve, FORCE_BROWSER_EVENT_TIMEOUT);
-        }
-      );
-    }
-  );
+  return new Promise<void>((resolve: () => void): void => {
+    setTimeout((): void => {
+      // Info:
+      // `scrollTo` will emit native browser scroll event
+      window.scrollTo(0, position);
+      setTimeout(resolve, FORCE_BROWSER_EVENT_TIMEOUT);
+    });
+  });
 }
 
 export async function scrollToPosition(sticky: Sticky, position: number): Promise<StickyEvent> {
-  return new Promise<StickyEvent>(
-    (resolve: (e: StickyEvent) => void): void => {
-      sticky.onStateChange(resolve);
+  return new Promise<StickyEvent>((resolve: (e: StickyEvent) => void): void => {
+    sticky.onStateChange(resolve);
 
-      setTimeout((): void => {
-        // Info:
-        // `scrollTo` will emit native browser scroll event
-        window.scrollTo(0, position);
-      }, FORCE_BROWSER_EVENT_TIMEOUT);
-    }
-  );
+    setTimeout((): void => {
+      // Info:
+      // `scrollTo` will emit native browser scroll event
+      window.scrollTo(0, position);
+    }, FORCE_BROWSER_EVENT_TIMEOUT);
+  });
 }
 
 export async function triggerResizeEvent(): Promise<void> {
-  return new Promise<void>(
-    (resolve: () => void): void => {
-      // Info:
-      // This emits only the resize event without any kind of actual browser winder resize
-      setTimeout((): void => {
-        window.dispatchEvent(new Event('resize'));
-      }, 0);
+  return new Promise<void>((resolve: () => void): void => {
+    // Info:
+    // This emits only the resize event without any kind of actual browser winder resize
+    setTimeout((): void => {
+      window.dispatchEvent(new Event('resize'));
+    }, 0);
 
-      setTimeout(resolve, FORCE_BROWSER_EVENT_TIMEOUT);
-    }
-  );
+    setTimeout(resolve, FORCE_BROWSER_EVENT_TIMEOUT);
+  });
 }
