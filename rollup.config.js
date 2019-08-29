@@ -1,17 +1,11 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import typescript from 'rollup-plugin-typescript2';
-import {
-  uglify
-} from 'rollup-plugin-uglify';
-import {
-  terser
-} from 'rollup-plugin-terser';
+import { uglify } from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 import filesize from 'rollup-plugin-filesize';
 import pkg from './package.json';
-import {
-  typescript as tsc
-} from 'typescript';
+import { typescript as tsc } from 'typescript';
 
 const defaultPlugins = [
   resolve(),
@@ -23,29 +17,36 @@ const defaultPlugins = [
   filesize()
 ];
 
-export default [{
+export default [
+  {
     input: 'src/index.ts',
-    output: [{
-      file: pkg.main,
-      format: 'cjs'
-    }],
+    output: [
+      {
+        file: pkg.main,
+        format: 'cjs'
+      }
+    ],
     plugins: [...defaultPlugins, uglify()]
   },
   {
     input: 'src/index.ts',
-    output: [{
-      file: pkg.browser,
-      name: 'sticky',
-      format: 'iife'
-    }],
+    output: [
+      {
+        file: pkg.browser,
+        name: 'sticky',
+        format: 'iife'
+      }
+    ],
     plugins: [...defaultPlugins, uglify()]
   },
   {
     input: 'src/index.ts',
-    output: [{
-      file: pkg.module,
-      format: 'es'
-    }],
+    output: [
+      {
+        file: pkg.module,
+        format: 'es'
+      }
+    ],
     plugins: [
       ...defaultPlugins,
       terser({

@@ -4,7 +4,7 @@ jobs:
     docker:
       # specify the version you desire here
       # documented at https://circleci.com/docs/2.0/circleci-images/
-      - image: circleci/node:10.15-stretch-browsers
+      - image: circleci/node:10.16.3-stretch-browsers
 
     steps:
       - checkout
