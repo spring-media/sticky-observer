@@ -17,7 +17,6 @@
 .env.test.local
 .env.production.local
 .vscode
-.rpt2_cache
 
 npm-debug.log*
 yarn-debug.log*
