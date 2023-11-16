@@ -26,7 +26,8 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w",
+    "dev": "rollup -c -w & yarn dev:server",
+    "dev:server": "http-server -o ./demo/index.html",
     "lint": "tslint --project tsconfig.json",
     "test": "karma start karma.conf.js",
     "beforestart": "yarn lint && yarn test && yarn build",
@@ -40,6 +41,7 @@
     "@types/sinon": "7.0.13",
     "@types/sinon-chai": "3.2.3",
     "chai": "4.2.0",
+    "http-server": "13.1.0",
     "husky": "3.0.4",
     "karma": "4.3.0",
     "karma-chrome-launcher": "3.1.0",
