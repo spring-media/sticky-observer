@@ -11,8 +11,10 @@ import {
   removeScrollEvent,
   removeStickyClass,
   toNumber,
-  toStyleClasses
+  toStyleClasses,
+  PageSize
 } from './helper';
+import * as Helper from './helper';
 import * as states from './states';
 import {
   ChangeListeners,
@@ -28,6 +30,7 @@ export type StickyEventListener = (event: StickyEvent) => void;
 // Info: This is the 'default' (typed) signature of event listeners
 // tslint:disable no-any
 export type EventListener = (...args: any[]) => any;
+
 // tslint:enable no-any
 
 /**
@@ -86,6 +89,7 @@ export class StickyObserver implements Sticky {
   private stateChangeListener: StickyEventListener = noop;
   private resizeChangeListener: StickyEventListener = noop;
   private readonly globalEventListener: EventListener;
+  private windowDimensions: PageSize;
 
   constructor(private elements: HTMLElement[], private container: HTMLElement, private settings: StickySettings = {}) {
     this.active = false;
@@ -93,6 +97,7 @@ export class StickyObserver implements Sticky {
     // Initial value
     this.updateScrollTopPosition();
     this.globalEventListener = (): void => this.updateScrollTopPosition();
+    this.windowDimensions = Helper.getPageSize();
   }
 
   public init(): void {
@@ -162,7 +167,7 @@ export class StickyObserver implements Sticky {
       state: StickyState.NORMAL,
       stickyClass: toStyleClasses(element.dataset.stickyClass),
       placeholderClass: element.dataset.stickyPlaceholderClass,
-      placeholderAutoHeight: !!element.dataset.stickyPlaceholderAutoHeight || true,
+      placeholderAutoHeight: element.dataset.stickyPlaceholderAutoHeight !== 'false',
       addClass: addClass(stickyElement),
       removeClass: removeClass(stickyElement),
       addStickyClass: addStickyClass(stickyElement),
@@ -230,6 +235,14 @@ export class StickyObserver implements Sticky {
   }
 
   private onResize(element: StickyHTMLElement): void {
+    const windowDimensions = Helper.getPageSize();
+
+    if (this.windowDimensions.equals(windowDimensions)) {
+      return;
+    }
+
+    this.windowDimensions = windowDimensions;
+
     if (this.isActive()) {
       // Info:
       // For the re-calculation of the sticky-state after a resize event we need to reset all positioning properties first.

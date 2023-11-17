@@ -10,6 +10,7 @@ import {
   triggerResizeEvent
 } from './test-helper';
 import { StickyHTMLElement, StickyState } from './types';
+import * as Helper from './helper';
 
 // Info:
 // The sticky element should be always normal even on scrolling
@@ -33,9 +34,16 @@ describe('Sticky Observer', (): void => {
   let stickyTestContext: StickyTestContext;
   let updateScrollPositionSpy: sinon.SinonSpy;
   let windowAddEventListenerSpy: sinon.SinonSpy;
+  let getPageSizeStub: sinon.SinonStub;
 
   beforeEach((): void => {
     stickyTestContext = new StickyTestContext(fixture);
+    getPageSizeStub = sinon.stub(Helper, 'getPageSize');
+    getPageSizeStub.returns({
+      width: 100,
+      height: 100,
+      equals: (): boolean => false
+    });
   });
 
   afterEach((): void => {
@@ -139,6 +147,12 @@ describe('Sticky Observer', (): void => {
       const resizeSpy: sinon.SinonSpy = sinon.spy();
       sticky.onResizeChange(resizeSpy);
       sticky.observe();
+
+      getPageSizeStub.returns({
+        width: 200,
+        height: 200,
+        equals: (): boolean => false
+      });
 
       return triggerResizeEvent().then((): void => {
         expect(resizeSpy).to.have.been.called;
