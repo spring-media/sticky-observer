@@ -20,9 +20,14 @@
       }
 
       .sticky-element--is-sticky {
-        position: sticky;
-        top: 0;
+        position: fixed;
+        top: 0px;
         color: white;
+      }
+
+      .sticky-element__placeholder {
+        height: 500px !important;
+        background: red;
       }
     </style>
   </head>
@@ -30,7 +35,13 @@
   <body>
     <header style="height: 100px; background: lightblue">Header</header>
     <div class="container" style="height: 500px;">
-      <div class="sticky-element" data-sticky-class="sticky-element--is-sticky">Element</div>
+      <div
+        class="sticky-element"
+        data-sticky-class="sticky-element--is-sticky"
+        data-sticky-placeholder-class="sticky-element__placeholder"
+      >
+        Element
+      </div>
     </div>
     <footer style="height: 1000px;background: lightblue">Footer</footer>
 
@@ -44,11 +55,15 @@
       stickyObserver.onStateChange(function(event) {
         switch (event.nextState) {
           case sticky.StickyState.STICKY:
-            console.log('STICKY');
+            event.element.sticky.addPlaceholder();
             event.element.sticky.addStickyClass();
             break;
           case sticky.StickyState.NORMAL:
-            console.log('NORMAL');
+            event.element.sticky.removePlaceholder();
+            event.element.sticky.removeStickyClass();
+            break;
+          case sticky.StickyState.STICKY_END_OF_CONTAINER:
+            event.element.sticky.removePlaceholder();
             event.element.sticky.removeStickyClass();
             break;
           default:
