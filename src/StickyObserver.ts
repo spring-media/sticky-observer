@@ -110,7 +110,7 @@ export class StickyObserver implements Sticky {
   // DX:
   // Check if `stickyElements()` are initialized. Throw error to call `init()` first.
   public observe(): void {
-    if (this.isActive() === false) {
+    if (!this.isActive()) {
       this.active = true;
       this.stickyElements.forEach((element: StickyHTMLElement): void => this.update(element));
     }
@@ -127,7 +127,7 @@ export class StickyObserver implements Sticky {
   }
 
   public isActive(): boolean {
-    return this.active === true;
+    return this.active;
   }
 
   public destroy(): void {
@@ -193,7 +193,7 @@ export class StickyObserver implements Sticky {
   }
 
   private update(element: StickyHTMLElement): void {
-    if (this.isActive() && element.sticky.active === true) {
+    if (this.isActive() && element.sticky.active) {
       const changeListeners: ChangeListeners = this.createChangeListeners();
 
       if (states.isStickyEndOfContainer(element, this.scrollTop)) {
@@ -248,6 +248,7 @@ export class StickyObserver implements Sticky {
       // For the re-calculation of the sticky-state after a resize event we need to reset all positioning properties first.
       // This is important but raises some UI problems.
       element.sticky.removeStickyClass();
+      element.sticky.removePlaceholder();
 
       const resizeEvent: StickyEvent = {
         prevState: element.sticky.state,
@@ -262,15 +263,16 @@ export class StickyObserver implements Sticky {
 
       const isStickyPossible: boolean = states.isStickyPossibleAtAll(element);
 
-      if (element.sticky.active === true && isStickyPossible) {
+      if (element.sticky.active && isStickyPossible) {
         this.update(element);
         // Info:
-        // Because of the stickyClass reset we need to re-add the class.
+        // Because of the sticky-class and placeholder reset we need to re-add both here.
         // When the current state is still `sticky` the `StickyEvent` is not emitted.
-        // The result is still an sticky element without sticky-class.
+        // The result is still a sticky element without sticky-class and placeholder.
         // This seems to be a hack.
         if (element.sticky.state !== StickyState.NORMAL) {
           element.sticky.addStickyClass();
+          element.sticky.addPlaceholder();
         }
       }
     }
@@ -282,7 +284,7 @@ export class StickyObserver implements Sticky {
   }
 
   private onScroll(element: StickyHTMLElement): void {
-    if (this.isActive() && element.sticky.active === true) {
+    if (this.isActive() && element.sticky.active) {
       recalculateOnNormalState(element);
       this.update(element);
     }
