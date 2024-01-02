@@ -1,5 +1,5 @@
 {
-  "name": "@welt/sticky-observer",
+  "name": "@weltn24/videoplayer",
   "description": "A simple and basic sticky observer (or watcher) on HTMLElement's in a given container",
   "version": "1.1.0",
   "main": "dist/sticky-observer.cjs.js",

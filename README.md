@@ -1,6 +1,6 @@
 # sticky-observer [![CircleCI](https://circleci.com/gh/spring-media/sticky-observer.svg?style=svg)](https://circleci.com/gh/spring-media/sticky-observer)
 
-[![npm](https://img.shields.io/npm/v/@welt/sticky-observer.svg)](https://www.npmjs.com/package/@welt/sticky-observer)
+[![npm](https://img.shields.io/npm/v/@weltn24/sticky-observer.svg)](https://www.npmjs.com/package/@weltn24/sticky-observer)
 [![codecov](https://codecov.io/gh/spring-media/sticky-observer/branch/master/graph/badge.svg)](https://codecov.io/gh/spring-media/sticky-observer)
 [![dep](https://david-dm.org/spring-media/sticky-observer/dev-status.svg)](https://david-dm.org/spring-media/sticky-observer?type=dev)
 [![GitHub license](https://img.shields.io/github/license/spring-media/sticky-observer.svg)](https://github.com/spring-media/sticky-observer/blob/master/LICENSE)
@@ -32,9 +32,9 @@ This library is in production on [welt.de](https://www.welt.de) for a few main f
 
 ```bash
 # via NPM
-npm install @welt/sticky-observer
+npm install @weltn24/sticky-observer
 # via yarn
-yarn add @welt/sticky-observer
+yarn add @weltn24/sticky-observer
 ```
 
 ## Usage example
@@ -44,7 +44,7 @@ yarn add @welt/sticky-observer
 ```
 
 ```js
-import { StickyObserver } from '@welt/sticky-observer';
+import { StickyObserver } from '@weltn24/sticky-observer';
 
 const stickyContainer = document.querySelector('.container');
 const stickyElement = document.querySelector('.sticky-element');
