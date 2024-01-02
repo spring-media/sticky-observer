@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
+import * as Helper from './helper';
 import { Sticky, StickyObserver } from './StickyObserver';
 import {
   scrollTo,
@@ -10,7 +11,6 @@ import {
   triggerResizeEvent
 } from './test-helper';
 import { StickyHTMLElement, StickyState } from './types';
-import * as Helper from './helper';
 
 // Info:
 // The sticky element should be always normal even on scrolling

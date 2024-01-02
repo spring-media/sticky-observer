@@ -3,6 +3,7 @@ import {
   addPlaceholder,
   addStickyClass,
   noop,
+  PageSize,
   position,
   recalculateOnNormalState,
   removeClass,
@@ -11,8 +12,7 @@ import {
   removeScrollEvent,
   removeStickyClass,
   toNumber,
-  toStyleClasses,
-  PageSize
+  toStyleClasses
 } from './helper';
 import * as Helper from './helper';
 import * as states from './states';
@@ -235,7 +235,7 @@ export class StickyObserver implements Sticky {
   }
 
   private onResize(element: StickyHTMLElement): void {
-    const windowDimensions = Helper.getPageSize();
+    const windowDimensions: PageSize = Helper.getPageSize();
 
     if (this.pageSize.equals(windowDimensions)) {
       return;

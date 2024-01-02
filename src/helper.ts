@@ -1,9 +1,10 @@
 import { RectPosition, StickyHTMLElement, StickyState } from './types';
 
-export type WidthHeight = {
+export interface WidthHeight {
   width: number;
   height: number;
-};
+}
+
 export type PageSize = WidthHeight & { equals: (other: WidthHeight) => boolean };
 
 export const position: (element: HTMLElement) => RectPosition = (element: HTMLElement): RectPosition => {
@@ -140,9 +141,12 @@ export const toStyleClasses: (value: string | undefined) => string[] = (value: s
 export function getPageSize(): PageSize {
   const width: number = document.documentElement.scrollWidth;
   const height: number = document.documentElement.scrollHeight;
-  const equals = (other: WidthHeight) => {
-    return width === other.width && height === other.height;
-  };
 
-  return { width, height, equals };
+  return {
+    width,
+    height,
+    equals: (other: WidthHeight): boolean => {
+      return width === other.width && height === other.height;
+    }
+  };
 }
