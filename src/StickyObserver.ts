@@ -89,7 +89,7 @@ export class StickyObserver implements Sticky {
   private stateChangeListener: StickyEventListener = noop;
   private resizeChangeListener: StickyEventListener = noop;
   private readonly globalEventListener: EventListener;
-  private windowDimensions: PageSize;
+  private pageSize: PageSize;
 
   constructor(private elements: HTMLElement[], private container: HTMLElement, private settings: StickySettings = {}) {
     this.active = false;
@@ -97,7 +97,7 @@ export class StickyObserver implements Sticky {
     // Initial value
     this.updateScrollTopPosition();
     this.globalEventListener = (): void => this.updateScrollTopPosition();
-    this.windowDimensions = Helper.getPageSize();
+    this.pageSize = Helper.getPageSize();
   }
 
   public init(): void {
@@ -237,11 +237,11 @@ export class StickyObserver implements Sticky {
   private onResize(element: StickyHTMLElement): void {
     const windowDimensions = Helper.getPageSize();
 
-    if (this.windowDimensions.equals(windowDimensions)) {
+    if (this.pageSize.equals(windowDimensions)) {
       return;
     }
 
-    this.windowDimensions = windowDimensions;
+    this.pageSize = windowDimensions;
 
     if (this.isActive()) {
       // Info:
