@@ -1,60 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sticky-Observer Playground</title>
+    <script src="../dist/sticky-observer.js"></script>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <script src="../dist/sticky-observer.js"></script>
-
-  <style>
-    .sticky-element {
-      color: red;
-    }
-
-    .sticky-element--is-sticky {
-      position: fixed;
-      color: green;
-    }
-
-  </style>
-</head>
-
-<body>
-
-  <div class="container" style="height: 5000px;">
-    <div class="sticky-element" data-sticky-class="sticky-element--is-sticky">example</div>
-  </div>
-
-
-  <script>
-    var stickyContainer = document.querySelector('.container');
-    var stickyElement = document.querySelector('.sticky-element');
-    var stickyObserver = new sticky.StickyObserver([stickyElement], stickyContainer);
-
-    stickyObserver.init();
-
-    stickyObserver.onStateChange(function (event) {
-      switch (event.nextState) {
-        case sticky.StickyState.STICKY:
-          console.log('STICKY');
-          event.element.sticky.addStickyClass();
-          break;
-        case sticky.StickyState.NORMAL:
-          console.log('NORMAL');
-          event.element.sticky.removeStickyClass();
-          break;
-        default:
-          // ignore
-          break;
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-family: sans-serif;
+        font-size: 5rem;
       }
-    });
 
-    stickyObserver.observe();
+      .sticky-element {
+        color: red;
+      }
 
-  </script>
+      .sticky-element--is-sticky {
+        position: fixed;
+        top: 0;
+        color: white;
+      }
 
-</body>
+      .sticky-element__placeholder {
+        height: 500px !important;
+        background: red;
+      }
+    </style>
+  </head>
 
+  <body>
+    <header style="height: 100px; background: lightblue">Header</header>
+    <div class="container" style="height: 500px;">
+      <div
+        class="sticky-element"
+        data-sticky-class="sticky-element--is-sticky"
+        data-sticky-placeholder-class="sticky-element__placeholder"
+      >
+        Element
+      </div>
+    </div>
+    <footer style="height: 1000px;background: lightblue">Footer</footer>
+
+    <script>
+      var stickyContainer = document.querySelector('.container');
+      var stickyElement = document.querySelector('.sticky-element');
+      var stickyObserver = new sticky.StickyObserver([stickyElement], stickyContainer);
+
+      stickyObserver.init();
+
+      stickyObserver.onStateChange(function(event) {
+        switch (event.nextState) {
+          case sticky.StickyState.STICKY:
+            event.element.sticky.addPlaceholder();
+            event.element.sticky.addStickyClass();
+            break;
+          case sticky.StickyState.NORMAL:
+            event.element.sticky.removePlaceholder();
+            event.element.sticky.removeStickyClass();
+            break;
+          case sticky.StickyState.STICKY_END_OF_CONTAINER:
+            event.element.sticky.removePlaceholder();
+            event.element.sticky.removeStickyClass();
+            break;
+          default:
+            // ignore
+            break;
+        }
+      });
+
+      stickyObserver.observe();
+    </script>
+  </body>
 </html>
